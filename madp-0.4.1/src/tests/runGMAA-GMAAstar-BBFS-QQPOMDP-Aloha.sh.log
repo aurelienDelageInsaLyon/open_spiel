@@ -1,0 +1,32 @@
+GMAA-MAAstar using a BGIP-BFS solver and a QPOMDP heuristic
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/Aloha_NoNewPacket_2InLine_maxBL2
+Results will not be stored to disk.
+QPOMDP heuristic computed
+
+===================== GMAA run 1/1 starting
+Hit CBG upperbound
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 4, 1 >
+Maximum number of nodes that could have been expanded:
+< 16, 64 >
+
+value=-1.56
+OptimalValueDatabase: entry 'Aloha_NoNewPacket_2InLine_maxBL2 1 2'
+OptimalValueDatabase: Computed value matches with OptimalValueDatabase
+Running Simulation to determine control quality...
+Sampled value = -1.56372 (computed was -1.56)
+===================== GMAA run 1/1 ended, Dec-POMDP value=-1.56
+
+Summary of timing results:
+ComputeQ: 0 s in 1 measurements, max 0, avg 0, min 0
+Overall: 0.12 s in 1 measurements, max 0.12, avg 0.12, min 0.12
+Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+PlanningUnit: 0 s in 1 measurements, max 0, avg 0, min 0
+Simulation: 0.12 s in 1 measurements, max 0.12, avg 0.12, min 0.12
+GMAA::Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan::iteration: 0 s in 5 measurements, max 0, avg 0, min 0
+GMAA_MAAstar::NextExact_ts0: 0 s in 4 measurements, max 0, avg 0, min 0
+GMAA_MAAstar::NextExact_ts1: 0 s in 1 measurements, max 0, avg 0, min 0
+evaluateRandomPolicy sampled value: -2.616

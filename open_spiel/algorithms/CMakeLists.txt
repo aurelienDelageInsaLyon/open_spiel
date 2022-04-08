@@ -1,3 +1,9 @@
+
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/base)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/support)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/planning)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/include)
+
 add_library (algorithms OBJECT
   best_response.cc
   best_response.h
@@ -178,7 +184,6 @@ add_test(tensor_game_utils_test tensor_game_utils_test)
 
 add_executable(trajectories_test trajectories_test.cc
     $<TARGET_OBJECTS:algorithms> ${OPEN_SPIEL_OBJECTS})
-add_test(trajectories_test trajectories_test)
 
 add_subdirectory (alpha_zero)
 add_subdirectory (alpha_zero_torch)

@@ -1,0 +1,4 @@
+nash_conv P1 : 0.4
+nash_conv P2 : 0.22
+nash_conv P1 : 0.555
+nash_conv P2 : 0.2

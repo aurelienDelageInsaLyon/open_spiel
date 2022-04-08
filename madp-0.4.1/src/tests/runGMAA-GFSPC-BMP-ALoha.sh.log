@@ -1,0 +1,31 @@
+FSPC (JAIR 2008) using a BGIP-MP solver and a INVALIDQHEUR heuristic
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/Aloha_NoNewPacket_2InLine_maxBL2
+Results will not be stored to disk.
+INVALIDQHEUR heuristic computed
+
+===================== GMAA run 1/1 starting
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1, 1 >
+Maximum number of nodes that could have been expanded:
+< 4, 64 >
+
+value=-1.56
+OptimalValueDatabase: entry 'Aloha_NoNewPacket_2InLine_maxBL2 1 2'
+OptimalValueDatabase: Computed value is 1 of optimal (value -1.56)
+Running Simulation to determine control quality...
+Sampled value = -1.56102 (computed was -1.56)
+===================== GMAA run 1/1 ended, Dec-POMDP value=-1.56
+
+Summary of timing results:
+ComputeQ: 0 s in 1 measurements, max 0, avg 0, min 0
+Overall: 0.15 s in 1 measurements, max 0.15, avg 0.15, min 0.15
+Plan: 0.01 s in 1 measurements, max 0.01, avg 0.01, min 0.01
+PlanningUnit: 0 s in 1 measurements, max 0, avg 0, min 0
+Simulation: 0.14 s in 1 measurements, max 0.14, avg 0.14, min 0.14
+GMAA::Plan: 0.01 s in 1 measurements, max 0.01, avg 0.01, min 0.01
+GMAA::Plan::iteration: 0.01 s in 2 measurements, max 0.01, avg 0.005, min 0
+GMAA::kGMAA_ts0: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::kGMAA_ts1: 0 s in 1 measurements, max 0, avg 0, min 0
+evaluateRandomPolicy sampled value: -2.616

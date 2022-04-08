@@ -1,0 +1,12 @@
+GMAA-MAAstar (JAIR 2008)
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/relay4
+Results will not be stored to disk.
+TreeIncPruneU1CS1VC1BGPlanner: t 1 contains < 1 1 1 1 1 1 1 1 1 > vectors (total 9)
+TreeIncPruneBGPlanner::BackupStage computing all Gaoa vectors
+
+--------------------------------------
+-proceeding with a=0-------------------
+--------------------------------------
+
+ERROR: AlphaVectorPruning: lpsolve was not installed

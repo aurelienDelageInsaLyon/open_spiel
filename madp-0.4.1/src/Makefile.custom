@@ -1,0 +1,111 @@
+# Contains several project-wide Makefile options
+
+cleantags: cleantags-recursive
+
+cleantags-recursive:
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) cleantags) || exit 1; \
+	done; \
+	rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags; \
+	rm -f cscope.out cscope.in.out cscope.po.out cscope.files
+
+#####################################################################
+# Optional software packages to be used, check configuration.h to
+# enable them
+
+# For using arbitrary length integers
+# Should be set if USE_ARBITRARY_PRECISION_INDEX is set to 1
+#GMP_LD=-lgmpxx -lgmp
+
+
+LIBDAI_NORMAL = $(top_builddir)/src/libDAI/libDAI.la
+LIBDAI_INCLUDES =  -I$(top_srcdir)/src/libDAI
+
+
+# The following is necessary for calling Matlab from the C++ code
+# Just set the correct MATLAB_DIR and uncomment all three lines
+#MATLAB_DIR = /scratch/matlabR2008a
+#MATLAB_INCLUDES = -I$(MATLAB_DIR)/extern/include/
+#MATLAB_LD = -L$(MATLAB_DIR)/bin/glnxa64/ \
+# -lmat -leng -lmx -lut
+
+# the open PNL library
+#PNL_LD = #define PNL library path 
+#PNL_INCLUDES = #define the PNL includes.
+#typically something like
+#PNL_LD = -L/home/faolieho/Documents/software/PNL/high/source -L/home/faolieho/Documents/software/PNL/cxcore/cxcore/src -L/home/faolieho/Documents/software/PNL/c_pgmtk/src -lhigh -lpnl -lcxcore -lpthread
+#and
+#PNL_INCLUDES = -I$(HOME)/include/pnl -I$(HOME)/include/pnl/high -I$(HOME)/include/pnl/opencx  -I$(HOME)/include/pnl/cart
+#
+#NOTE: in order to build DEBUG libraries (i.e., include the debug version of 
+# the PNL lib), the PNL_LD path should point to where the PNL library is built,
+# rather than installed. For some reason things are not working smoothly when 
+# pointing to the installation libdir (something to do with libtool I think).
+
+
+#####################################################################
+# Compiler flags
+
+
+# the debug flags used - according to 
+# http://sourceware.org/gdb/current/onlinedocs/gdb_13.html#SEC111
+# dwarf-2 is best for c++ and gdb
+# -fno-inline should make things easier to debug
+DEBUG_FLAGS = -O0 -gdwarf-2 -fno-inline
+
+# Optimization flags used for building normal and profiling libraries.
+# -DNDEBUG speeds up the boost::numeric::ublas operations
+CPP_OPTIMIZATION_FLAGS = -O3 -DNDEBUG
+
+#machine architectecture specific flags
+#XXX: the following does not work on MacOS! (leave empty to resolve)
+# Matthijs: is it not just a problem with using a GCC version that is
+# too old to support this?
+MARCH_FLAGS = -march=native  # automatically picks the correct settings for your system
+
+if FOUND_LIBXML2
+  XML2_CXXFLAGS = `xml2-config --cflags`
+endif
+
+#default flags throughout all MADP:
+MADP_CXXFLAGS = -pipe $(MARCH_FLAGS) $(CSTANDARD) $(XML2_CXXFLAGS)
+MADP_CPPFLAGS = 
+MADP_CFLAGS =  
+
+#####################################################################
+# The final include path
+# fao 2014-02-01: added $(INCLUDE) such that we can all add include paths, for e.g., cplex.
+MADP_INCLUDES = \
+ $(INCLUDE) \
+ $(LIBDAI_INCLUDES)\
+ -I$(top_srcdir)/src/boost
+
+MADP_LD = 
+
+#####################################################################
+# Lists of libs to be linked with binaries.
+# Note that the linking order matters, in order to correctly resolve symbols
+MADPLIBS_NORMAL_BASE = \
+ $(top_builddir)/src/base/libMADPBase.la
+
+MADPLIBS_NORMAL_BASE_SUPPORT = \
+ $(top_builddir)/src/support/libMADPSupport.la \
+ $(MADPLIBS_NORMAL_BASE) 
+
+MADPLIBS_NORMAL_BASE_PARSER = \
+ $(top_builddir)/src/parser/libMADPParser.la \
+ $(MADPLIBS_NORMAL_BASE) \
+ $(LIBPOMDPSOLVE_NORMAL) $(LIBLPSOLVEOLD_NORMAL) $(LIBMDP_NORMAL) $(LIBLASPACK_NORMAL)
+
+MADPLIBS_NORMAL_BASE_PARSER_SUPPORT = \
+ $(top_builddir)/src/support/libMADPSupport.la \
+ $(MADPLIBS_NORMAL_BASE_PARSER) 
+
+MADPLIBS_NORMAL = $(top_builddir)/src/madp/libMADP.la
+# $(top_builddir)/src/planning/libMADPPlanning.la \
+# $(MADPLIBS_NORMAL_BASE_PARSER_SUPPORT) \
+# $(LIBDAI_NORMAL)
+
+MADPLIBS_NORMAL_NOPARSER_NOPLANNING = 	$(MADPLIBS_NORMAL_BASE)
+MADPLIBS_NORMAL_NOPLANNING = 		$(MADPLIBS_NORMAL_BASE_PARSER_SUPPORT)
+MADPLIBS_NORMAL_NOPARSER = 		$(MADPLIBS_NORMAL)

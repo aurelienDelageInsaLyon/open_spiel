@@ -226,7 +226,7 @@ class State {
   // Negative numbers are for chance (-1) or simultaneous (-2).
   // kTerminalPlayerId should be returned on a TerminalNode().
   virtual Player CurrentPlayer() const = 0;
-
+  int rollout_mode_;
   // Change the state of the game by applying the specified action in turn-based
   // games or in non-simultaneous nodes of simultaneous move games.
   // This function encodes the logic of the game rules.
@@ -412,6 +412,34 @@ class State {
     return history;
   }
 
+  std::vector<PlayerAction> FullHistoryOfPlayer(Player player) const {
+    //std::cout << "\n call full history()";
+    std::vector<PlayerAction> res;
+    for (PlayerAction a : history_){
+      if (a.player==player || a.player == kChancePlayerId){
+        res.push_back(a);
+      }
+    }
+  //std::cout << "\n end call full history(), retuns :  " << res;
+  return res;
+  }
+
+    std::vector<PlayerAction> FullPrivateHistory(Player player) const {
+    //std::cout << "\n call full history()";
+    std::vector<PlayerAction> res;
+    for (PlayerAction a : history_){
+      if (a.player==player){
+        res.push_back(a);
+      }
+      else if (a.player == kChancePlayerId){
+        std::cout<<"\n player : " << player << " a : "<< a.action;// << " = ? " << (rollout_mode==player);
+        res.push_back(a);
+      }
+    }
+  std::cout << "\n end call full history(), retuns :  " << res;
+  return res;
+  }
+
   // The full (player, action) history.
   const std::vector<PlayerAction>& FullHistory() const { return history_; }
 
@@ -564,11 +592,13 @@ class State {
 
   // Creates the child from State corresponding to action.
   std::unique_ptr<State> Child(Action action) const {
+    //std::cout << "\n in child()"<<std::flush;
     std::unique_ptr<State> child = Clone();
+    //std::cout << "\n cloned " << std::flush;
     child->ApplyAction(action);
     return child;
   }
-
+  
   // Undoes the last action, which must be supplied. This is a fast method to
   // undo an action. It is only necessary for algorithms that need a fast undo
   // (e.g. minimax search).

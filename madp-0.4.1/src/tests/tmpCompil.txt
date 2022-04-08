@@ -1,0 +1,1 @@
+g++ -DHAVE_CONFIG_H -I. -I../..  -pipe -march=native   -I.. -I../../src/base -I../../src/include -I../../src/support -I../../src/planning -I../../src/parser  -I../../src/libDAI -I../../src/boost -O3 -DNDEBUG   -std=c++98 -g -O2 -MT tst_parse-test_parse.o -MD -MP -MF .deps/tst_parse-test_parse.Tpo -c -o tst_parse-test_parse.o `test -f 'test_parse.cpp' || echo './'`test_parse.cpp

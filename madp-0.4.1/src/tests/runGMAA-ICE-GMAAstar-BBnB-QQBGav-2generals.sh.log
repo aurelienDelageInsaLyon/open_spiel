@@ -1,0 +1,6 @@
+GMAA-ICE (JAIR 2013) using a BGIP-BnB solver and a QBGav heuristic
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/2generals
+Results will not be stored to disk.
+MonahanBGPlanner: t 1 contains < 1 1 1 1 > vectors (total 4)
+ERROR: AlphaVectorPruning: lpsolve was not installed

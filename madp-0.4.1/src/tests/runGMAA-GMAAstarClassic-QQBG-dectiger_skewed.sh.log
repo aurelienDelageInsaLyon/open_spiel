@@ -1,0 +1,32 @@
+GMAA-MAAstar (JAIR 2008)
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/dectiger_skewed
+Results will not be stored to disk.
+QBG heuristic computed
+
+===================== GMAA run 1/1 starting
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=5.695, parent (upperbound) value=5.695
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+
+value=5.695
+OptimalValueDatabase: entry 'dectiger_skewed 1 2'
+OptimalValueDatabase: Computed value matches with OptimalValueDatabase
+Running Simulation to determine control quality...
+Sampled value = 5.562 (computed was 5.695)
+===================== GMAA run 1/1 ended, Dec-POMDP value=5.695
+
+Summary of timing results:
+ComputeQ: 0.01 s in 1 measurements, max 0.01, avg 0.01, min 0.01
+Overall: 0.13 s in 1 measurements, max 0.13, avg 0.13, min 0.13
+Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+PlanningUnit: 0 s in 1 measurements, max 0, avg 0, min 0
+Simulation: 0.12 s in 1 measurements, max 0.12, avg 0.12, min 0.12
+GMAA::NextExact_ts0: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::NextExact_ts1: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan::iteration: 0 s in 2 measurements, max 0, avg 0, min 0
+evaluateRandomPolicy sampled value: -91.735

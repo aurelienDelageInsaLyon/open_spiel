@@ -1,0 +1,32 @@
+GMAA-MAAstar (JAIR 2008)
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/DecTiger
+Results will not be stored to disk.
+INVALIDQHEUR heuristic computed
+
+===================== GMAA run 1/1 starting
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 243, 16 >
+Maximum number of nodes that could have been expanded:
+<  >
+
+value=5.19081
+OptimalValueDatabase: entry 'DecTiger 1 3'
+OptimalValueDatabase: Computed value matches with OptimalValueDatabase
+Running Simulation to determine control quality...
+Sampled value = 4.8321 (computed was 5.19081)
+===================== GMAA run 1/1 ended, Dec-POMDP value=5.19081
+
+Summary of timing results:
+ComputeQ: 0 s in 1 measurements, max 0, avg 0, min 0
+Overall: 0.14 s in 1 measurements, max 0.14, avg 0.14, min 0.14
+Plan: 0.06 s in 1 measurements, max 0.06, avg 0.06, min 0.06
+PlanningUnit: 0 s in 1 measurements, max 0, avg 0, min 0
+Simulation: 0.08 s in 1 measurements, max 0.08, avg 0.08, min 0.08
+GMAA::NextExact_ts0: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::NextExact_ts1: 0 s in 3 measurements, max 0, avg 0, min 0
+GMAA::NextExact_ts2: 0.05 s in 16 measurements, max 0.01, avg 0.003125, min 0
+GMAA::Plan: 0.06 s in 1 measurements, max 0.06, avg 0.06, min 0.06
+GMAA::Plan::iteration: 0.06 s in 20 measurements, max 0.01, avg 0.003, min 0
+evaluateRandomPolicy sampled value: -140.81

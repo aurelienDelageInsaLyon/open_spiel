@@ -19,7 +19,6 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
-#include <memory>
 #include <random>
 #include <string>
 
@@ -102,20 +101,6 @@ std::shared_ptr<const Game> GamutGenerator::GenerateGame(
     file::Remove(tmp_filename);
   }
   return game;
-}
-
-std::shared_ptr<const matrix_game::MatrixGame>
-GamutGenerator::GenerateMatrixGame(
-    const std::vector<std::string>& cmdline_args) {
-  return std::dynamic_pointer_cast<const matrix_game::MatrixGame>(
-      GenerateGame(cmdline_args));
-}
-
-std::shared_ptr<const tensor_game::TensorGame>
-GamutGenerator::GenerateTensorGame(
-    const std::vector<std::string>& cmdline_args) {
-  return std::dynamic_pointer_cast<const tensor_game::TensorGame>(
-      GenerateGame(cmdline_args));
 }
 
 }  // namespace gamut

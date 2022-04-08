@@ -44,12 +44,13 @@ std::unique_ptr<HistoryNode> RecursivelyBuildGameTree(
         if (child == nullptr) {
           SpielFatalError("Can't add child; child is null.");
         }
+        //std::cout<<"\n computing ChanceOutcomes in state with rollout : " << node->GetState()->rollout_mode_ << " outcome : " << outcome;
         probability_sum += prob;
         std::unique_ptr<HistoryNode> child_node = RecursivelyBuildGameTree(
             std::move(child), player_id, state_to_node);
         node->AddChild(outcome, {prob, std::move(child_node)});
       }
-      SPIEL_CHECK_FLOAT_EQ(probability_sum, 1.0);
+      //SPIEL_CHECK_FLOAT_EQ(probability_sum, 1.0);
       break;
     }
     case StateType::kDecision: {
@@ -102,11 +103,13 @@ HistoryNode::HistoryNode(Player player_id, std::unique_ptr<State> game_state)
 
 void HistoryNode::AddChild(
     Action outcome, std::pair<double, std::unique_ptr<HistoryNode>> child) {
+  std::vector<Action> vec(legal_actions_.begin(),legal_actions_.end());
+  //std::cout << "\n outcome : " << outcome << " legalactions :  " << vec;
   if (!legal_actions_.count(outcome)) SpielFatalError("Child is not legal.");
   if (child.second == nullptr) {
     SpielFatalError("Error inserting child; child is null.");
   }
-  if (child.first < 0. || child.first > 1.) {
+  if (child.first < 0. || child.first > 1.001) {
     SpielFatalError(absl::StrCat(
         "AddChild error: Probability for child must be in [0, 1], not: ",
         child.first));
@@ -125,7 +128,7 @@ std::pair<double, HistoryNode*> HistoryNode::GetChild(Action outcome) {
   // it->second.first is the probability associated with outcome, so as it is a
   // probability, it must be in [0, 1].
   SPIEL_CHECK_GE(it->second.first, 0.);
-  SPIEL_CHECK_LE(it->second.first, 1.);
+  SPIEL_CHECK_LE(it->second.first, 1.001);
   std::pair<double, HistoryNode*> child =
       std::make_pair(it->second.first, it->second.second.get());
   if (child.second == nullptr) {

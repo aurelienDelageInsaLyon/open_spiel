@@ -41,7 +41,17 @@ void BasicRepeatedGameTest() {
   SPIEL_CHECK_TRUE(repeated_game != nullptr);
 }
 
-void RepeatedRockPaperScissorsTest(std::shared_ptr<const Game> repeated_game) {
+void RepeatedRockPaperScissorsTest() {
+  GameParameters params;
+  params["num_repetitions"] = GameParameter(3);
+  std::shared_ptr<const Game> repeated_game =
+      CreateRepeatedGame("matrix_rps", params);
+  SPIEL_CHECK_EQ(repeated_game->GetType().max_num_players, 2);
+  SPIEL_CHECK_EQ(repeated_game->GetType().min_num_players, 2);
+  SPIEL_CHECK_EQ(repeated_game->GetType().utility, GameType::Utility::kZeroSum);
+  SPIEL_CHECK_EQ(repeated_game->GetType().reward_model,
+                 GameType::RewardModel::kRewards);
+
   std::unique_ptr<open_spiel::State> state = repeated_game->NewInitialState();
   SPIEL_CHECK_EQ(state->LegalActions(0), state->LegalActions(1));
   SPIEL_CHECK_EQ(state->ActionToString(0, 0), "Rock");
@@ -71,49 +81,6 @@ void RepeatedRockPaperScissorsTest(std::shared_ptr<const Game> repeated_game) {
                                  std::vector<int>{0, 0, 1, 0, 0, 1}));
   SPIEL_CHECK_TRUE(state->IsTerminal());
 }
-
-void RepeatedRockPaperScissorsDefaultsTest() {
-  GameParameters params;
-  params["num_repetitions"] = GameParameter(3);
-  std::shared_ptr<const Game> repeated_game =
-      CreateRepeatedGame("matrix_rps", params);
-  SPIEL_CHECK_EQ(repeated_game->GetType().max_num_players, 2);
-  SPIEL_CHECK_EQ(repeated_game->GetType().min_num_players, 2);
-  SPIEL_CHECK_EQ(repeated_game->GetType().utility, GameType::Utility::kZeroSum);
-  SPIEL_CHECK_EQ(repeated_game->GetType().reward_model,
-                 GameType::RewardModel::kRewards);
-  SPIEL_CHECK_TRUE(repeated_game->GetType().provides_observation_tensor);
-  SPIEL_CHECK_FALSE(repeated_game->GetType().provides_information_state_tensor);
-
-  // One-hot encoding of each player's previous action.
-  SPIEL_CHECK_EQ(repeated_game->ObservationTensorShape()[0], 6);
-
-  RepeatedRockPaperScissorsTest(repeated_game);
-}
-
-void RepeatedRockPaperScissorsInfoStateEnabledTest() {
-  GameParameters params;
-  params["num_repetitions"] = GameParameter(3);
-  params["enable_infostate"] = GameParameter(true);
-  std::shared_ptr<const Game> repeated_game =
-      CreateRepeatedGame("matrix_rps", params);
-  SPIEL_CHECK_EQ(repeated_game->GetType().max_num_players, 2);
-  SPIEL_CHECK_EQ(repeated_game->GetType().min_num_players, 2);
-  SPIEL_CHECK_EQ(repeated_game->GetType().utility, GameType::Utility::kZeroSum);
-  SPIEL_CHECK_EQ(repeated_game->GetType().reward_model,
-                 GameType::RewardModel::kRewards);
-  SPIEL_CHECK_TRUE(repeated_game->GetType().provides_observation_tensor);
-  SPIEL_CHECK_TRUE(repeated_game->GetType().provides_information_state_tensor);
-
-  // One-hot encoding of each player's previous action.
-  SPIEL_CHECK_EQ(repeated_game->ObservationTensorShape()[0], 6);
-
-  // One-hot encoding of each player's previous action times num_repetitions.
-  SPIEL_CHECK_EQ(repeated_game->InformationStateTensorShape()[0], 18);
-
-  RepeatedRockPaperScissorsTest(repeated_game);
-}
-
 
 void RepeatedPrisonersDilemaTest() {
   GameParameters params;
@@ -154,7 +121,6 @@ void RepeatedPrisonersDilemaTest() {
 
 int main(int argc, char** argv) {
   open_spiel::BasicRepeatedGameTest();
-  open_spiel::RepeatedRockPaperScissorsDefaultsTest();
-  open_spiel::RepeatedRockPaperScissorsInfoStateEnabledTest();
+  open_spiel::RepeatedRockPaperScissorsTest();
   open_spiel::RepeatedPrisonersDilemaTest();
 }

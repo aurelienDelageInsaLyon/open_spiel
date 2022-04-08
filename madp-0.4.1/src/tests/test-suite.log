@@ -1,0 +1,78 @@
+==========================================
+   MADP 0.4.1: src/tests/test-suite.log
+==========================================
+
+# TOTAL: 27
+# PASS:  21
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  6
+# XPASS: 0
+# ERROR: 0
+
+.. contents:: :depth: 2
+
+FAIL: runGMAA-ICE-GMAAstar-BBnB-QQBGav-2generals.sh
+===================================================
+
+GMAA-ICE (JAIR 2013) using a BGIP-BnB solver and a QBGav heuristic
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/2generals
+Results will not be stored to disk.
+MonahanBGPlanner: t 1 contains < 1 1 1 1 > vectors (total 4)
+ERROR: AlphaVectorPruning: lpsolve was not installed
+
+FAIL: runGMAA-GMAAstarClassic-QQBGTreeIncPrune-relay4.sh
+========================================================
+
+GMAA-MAAstar (JAIR 2008)
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/relay4
+Results will not be stored to disk.
+TreeIncPruneU1CS1VC1BGPlanner: t 1 contains < 1 1 1 1 1 1 1 1 1 > vectors (total 9)
+TreeIncPruneBGPlanner::BackupStage computing all Gaoa vectors
+
+--------------------------------------
+-proceeding with a=0-------------------
+--------------------------------------
+
+ERROR: AlphaVectorPruning: lpsolve was not installed
+
+FAIL: runGMAA-IC-GMAAstar-QQBGTreeIncPrune-dectiger.sh
+======================================================
+
+GMAA-IC (AAMAS 2009) using a BGIP-BFS solver and a QBGTreeIncPrune heuristic
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/dectiger
+Results will not be stored to disk.
+TreeIncPruneU1CS1VC1BGPlanner: t 1 contains < 1 1 1 1 1 1 1 1 1 > vectors (total 9)
+TreeIncPruneBGPlanner::BackupStage computing all Gaoa vectors
+
+--------------------------------------
+-proceeding with a=0-------------------
+--------------------------------------
+
+ERROR: AlphaVectorPruning: lpsolve was not installed
+
+FAIL: runGMAA-IC-GMAAstar-QQBGav-prisoners.sh
+=============================================
+
+GMAA-IC (AAMAS 2009) using a BGIP-BFS solver and a QBGav heuristic
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/prisoners
+Results will not be stored to disk.
+MonahanBGPlanner: t 1 contains < 1 1 1 1 > vectors (total 4)
+ERROR: AlphaVectorPruning: lpsolve was not installed
+
+FAIL: runGMAA-ICE-GMAAstar-DTPGMX.sh
+====================================
+
+GMAA-ICE (JAIR 2013) using a BGIP-BnB solver and a INVALIDQHEUR heuristic
+ERROR: ParserProbModelXML: not compiled with libxml2 support
+
+FAIL: runGMAA-ICE-GMAAstar-FFG343.sh
+====================================
+
+GMAA-ICE (JAIR 2013) using a BGIP-BnB solver and a INVALIDQHEUR heuristic
+ERROR: ParserProbModelXML: not compiled with libxml2 support
+

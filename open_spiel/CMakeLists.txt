@@ -328,6 +328,10 @@ endif()
 # shared library, hence is intentionally left out. To use ABSL flags, link with
 # absl::flags and absl::flags_parse separately.
 set (BUILD_SHARED_LIB OFF CACHE BOOL "Build a shared library?")
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/madp-0.4.1/src/madp/.libs/)
+add_library(MADP SHARED IMPORTED)
+set_target_properties(MADP PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/madp-0.4.1/src/madp/.libs/libMADP.so )
+#target_link_libraries(GLBall MADP)
 if(NOT DEFINED ENV{BUILD_SHARED_LIB})
   set (ENV{BUILD_SHARED_LIB} OFF)
 endif()

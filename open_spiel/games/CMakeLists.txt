@@ -33,9 +33,6 @@ set(GAME_SOURCES
   clobber.h
   coin_game.cc
   coin_game.h
-  colored_trails.cc
-  colored_trails.h
-  colored_trails/colored_trails_utils.cc
   connect_four.cc
   connect_four.h
   coop_box_pushing.cc
@@ -111,8 +108,6 @@ set(GAME_SOURCES
   oware.h
   oware/oware_board.cc
   oware/oware_board.h
-  pathfinding.cc
-  pathfinding.h
   pentago.cc
   pentago.h
   phantom_ttt.cc
@@ -149,6 +144,13 @@ set(GAME_SOURCES
   ultimate_tic_tac_toe.cc
   y.cc
   y.h
+  matching_pennies.cc
+  matching_pennies.h
+  mabc.cc
+  mabc.h
+  posg_from_file.cc
+  posg_from_file.h
+
 )
 
 if (${OPEN_SPIEL_BUILD_WITH_HANABI})
@@ -161,6 +163,14 @@ endif()
 add_library (games OBJECT ${GAME_SOURCES})
 
 target_include_directories (games PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/base)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/support)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/planning)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/include)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/parser)
+include_directories (${CMAKE_CURRENT_SOURCE_DIR}/../../madp-0.4.1/src/tests)
+
 
 if (${OPEN_SPIEL_BUILD_WITH_HANABI})
   add_subdirectory(hanabi)
@@ -286,14 +296,6 @@ add_executable(coin_game_test coin_game_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>
                $<TARGET_OBJECTS:algorithms>)
 add_test(coin_game_test coin_game_test)
-
-add_executable(colored_trails_board_generator
-               colored_trails/colored_trails_board_generator.cc
-               ${OPEN_SPIEL_OBJECTS} $<TARGET_OBJECTS:tests>)
-
-add_executable(colored_trails_test colored_trails_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(colored_trails_test colored_trails_test)
 
 add_executable(connect_four_test connect_four_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>
@@ -441,10 +443,6 @@ add_executable(oware_test oware_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>
                $<TARGET_OBJECTS:algorithms>)
 add_test(oware_test oware_test)
-
-add_executable(pathfinding_test pathfinding_test.cc ${OPEN_SPIEL_OBJECTS}
-               $<TARGET_OBJECTS:tests>)
-add_test(pathfinding_test pathfinding_test)
 
 add_executable(pentago_test pentago_test.cc ${OPEN_SPIEL_OBJECTS}
                $<TARGET_OBJECTS:tests>)

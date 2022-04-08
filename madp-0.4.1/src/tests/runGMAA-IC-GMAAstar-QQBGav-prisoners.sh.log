@@ -1,0 +1,6 @@
+GMAA-IC (AAMAS 2009) using a BGIP-BFS solver and a QBGav heuristic
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/prisoners
+Results will not be stored to disk.
+MonahanBGPlanner: t 1 contains < 1 1 1 1 > vectors (total 4)
+ERROR: AlphaVectorPruning: lpsolve was not installed

@@ -1,0 +1,63 @@
+Not including positions
+GMAA Planner initialized
+FactoredQLastTimeStepOrQBG::Compute()
+FactoredQLastTimeStepOrQBG::Initialize()
+FactoredQLastTimeStepOrElse::Initialize()
+FactoredQLastTimeStepOrElse::Compute()
+Q heuristic computed
+
+
+---------------------------------------------
+GMAA_MAA_ELSI::ConstructAndValuateNextPolicies called for last stage. This is where the exploiting of interaction should happen
+
+-------------------------------------------
+--CONSTRUCTING GRAPHICAL BAYESIAN GAME-----
+-------------------------------------------
+
+1) adding scopes
+2) computing joint distribution P(s,aoh), given the past policy (and b^0)
+3) compute the LRFQs 
+4) Writing the computed LRFQs values to the CGBG 
+writing utilities to CGBG for LRF 0
+writing utilities to CGBG for LRF 1
+writing utilities to CGBG for LRF 2
+writing utilities to CGBG for LRF 3
+
+----------------------------------------------
+--FINISHED CONSTRUCTING CGBG, STARTING SOLVE--
+----------------------------------------------
+warning, GMAA_MAA_ELSI might give in-exact result when used with heuristics that do not faitfully represent the immediate reward
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 8, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+
+value=-5.21368
+PartialJointPolicyPureVector, past reward=0
+JPolComponent_VectorImplementation index 91
+Policy for agent 0 (index 1):
+Oempty,  --> left
+Oempty, Flames__,  --> left
+Oempty, NoFlames,  --> right
+Policy for agent 1 (index 3):
+Oempty,  --> left
+Oempty, Flames__,  --> right
+Oempty, NoFlames,  --> right
+Policy for agent 2 (index 3):
+Oempty,  --> left
+Oempty, Flames__,  --> right
+Oempty, NoFlames,  --> right
+OptimalValueDatabase: entry 'FireFightingGraph_3_4_3 1 2'
+OptimalValueDatabase: Computed value matches with OptimalValueDatabase
+
+Timing summary
+ComputeQ: 0.01 s in 1 measurements, max 0.01, avg 0.01, min 0.01
+Overall: 0.04 s in 1 measurements, max 0.04, avg 0.04, min 0.04
+Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+PlanningUnit: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::ConstructBG_ts0: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Last_stage_NDP_ts1: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::NextExact_ts0: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan::iteration: 0 s in 2 measurements, max 0, avg 0, min 0

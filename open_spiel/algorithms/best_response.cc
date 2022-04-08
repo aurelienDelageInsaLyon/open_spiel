@@ -143,12 +143,12 @@ double TabularBestResponse::HandleChanceCase(HistoryNode* node) {
 
     // Verify that the probability is valid. This should always be true.
     SPIEL_CHECK_GE(prob, 0.);
-    SPIEL_CHECK_LE(prob, 1.);
+    SPIEL_CHECK_LE(prob, 1.001);
     value += prob * Value(child->GetHistory());
   }
 
   // Verify that the sum of the probabilities is 1, within tolerance.
-  SPIEL_CHECK_FLOAT_EQ(prob_sum, 1.0);
+  //SPIEL_CHECK_FLOAT_EQ(prob_sum, 1.0);
   return value;
 }
 
@@ -205,6 +205,7 @@ Action TabularBestResponse::BestResponseAction(const std::string& infostate) {
   }
   if (best_action == -1) SpielFatalError("No action was chosen.");
   best_response_actions_[infostate] = best_action;
+  std::cout << "best value : " << best_value;
   return best_action;
 }
 
@@ -226,11 +227,11 @@ std::vector<Action> TabularBestResponse::BestResponseActions(
       SPIEL_CHECK_TRUE(child_node != nullptr);
       value += prob * Value(child_node->GetHistory());
     }
-    if (value > best_value + tolerance) {
+    if (value > best_value) {
       best_value = value;
       best_actions.clear();
       best_actions.push_back(action);
-    } else if (value > best_value - tolerance) {
+    } else if (value > best_value) {
       best_actions.push_back(action);
     }
   }

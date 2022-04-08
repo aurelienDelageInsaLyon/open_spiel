@@ -15,7 +15,6 @@
 #include "open_spiel/algorithms/trajectories.h"
 
 #include <unordered_map>
-
 #include "open_spiel/policy.h"
 #include "open_spiel/spiel_utils.h"
 

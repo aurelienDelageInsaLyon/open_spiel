@@ -1,0 +1,17 @@
+GMAA-ICE (JAIR 2013) using a BGIP-BnB solver and a QMDPc heuristic
+Not including positions
+GMAA Planner initialized
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/FireFightingFactored_2_3_3_0
+Results will not be stored to disk.
+QMDPc heuristic computed
+
+===================== GMAA run 1/1 starting
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 4 >
+Maximum number of nodes that could have been expanded:
+< 81, 324 >
+
+value=-4.38358
+OptimalValueDatabase: entry 'FireFightingFactored_2_3_3_0 1 2'
+OptimalValueDatabase: Optimal value unknown.

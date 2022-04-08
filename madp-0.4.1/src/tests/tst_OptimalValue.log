@@ -1,0 +1,350 @@
+Not including positions
+Not including positions
+Not including positions
+Not including positions
+Not including positions
+Not including positions
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:DecTiger
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-4, parent (upperbound) value=-4
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:DecTiger
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:DecTiger
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 3 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=1 problem:DecTigerWithCreaks
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=1 problem:DecTigerWithCreaks
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=1 problem:DecTigerWithCreaks
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:FireFighting_2_3_3
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-4.38358, parent (upperbound) value=-4.38358
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.38358
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:FireFighting_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 4 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.38358
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:FireFighting_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 4 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.38358
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:Aloha_NoNewPacket_OneIsland_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=0, parent (upperbound) value=0
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 2, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:0
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:Aloha_NoNewPacket_OneIsland_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=0, parent (upperbound) value=0
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 2, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:0
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:Aloha_NoNewPacket_OneIsland_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=0, parent (upperbound) value=0
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 2, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:0
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:Aloha_NoNewPacket_TwoIslands_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-1.56, parent (upperbound) value=-1.56
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 4, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-1.56
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:Aloha_NoNewPacket_TwoIslands_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-1.56, parent (upperbound) value=-1.56
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 4, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-1.56
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:Aloha_NoNewPacket_TwoIslands_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-1.56, parent (upperbound) value=-1.56
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 4, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-1.56
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:Aloha_NoNewPacket_ThreeIslandsInLine_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-1.8, parent (upperbound) value=-1.8
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 8, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-1.8
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:Aloha_NoNewPacket_ThreeIslandsInLine_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-1.8, parent (upperbound) value=-1.8
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 8, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-1.8
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:Aloha_NoNewPacket_ThreeIslandsInLine_maxBL2
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-1.8, parent (upperbound) value=-1.8
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 8, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-1.8
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:FireFightingFactored_2_3_3
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-4.38358, parent (upperbound) value=-4.38358
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.38358
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:FireFightingFactored_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 4 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.38358
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:FireFightingFactored_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 4 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.38358
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:FireFightingGraph_2_3_3
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-4.39425, parent (upperbound) value=-4.39425
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 4, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.39425
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:FireFightingGraph_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 4, 2 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.39425
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:FireFightingGraph_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 4, 2 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-4.39425
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=2 problem:FireFightingGraph_3_4_3
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=-5.21368, parent (upperbound) value=-5.21368
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 8, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-5.21368
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=2 problem:FireFightingGraph_3_4_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 8, 2 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-5.21368
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=2 problem:FireFightingGraph_3_4_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 8, 4 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-5.21368
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=1 problem:_FireFightingFactored_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2.48148
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=1 problem:_FireFightingFactored_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2.48148
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=1 problem:_FireFightingFactored_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2.48148
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QBG -------
+------horizon=1 problem:_FireFightingGraph_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2.48148
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QPOMDP ----
+------horizon=1 problem:_FireFightingGraph_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2.48148
+OptimalValueDatabase: correct optimal value
+---------------------------------------
+------gmaa MAA* QMDP ------
+------horizon=1 problem:_FireFightingGraph_2_3_3
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+optimal value:-2.48148
+OptimalValueDatabase: correct optimal value

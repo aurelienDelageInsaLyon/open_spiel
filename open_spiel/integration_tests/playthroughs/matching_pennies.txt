@@ -1,0 +1,155 @@
+game: matching_pennies
+
+GameType.chance_mode = ChanceMode.EXPLICIT_STOCHASTIC
+GameType.dynamics = Dynamics.SIMULTANEOUS
+GameType.information = Information.IMPERFECT_INFORMATION
+GameType.long_name = "Matching Pennies"
+GameType.max_num_players = 2
+GameType.min_num_players = 2
+GameType.parameter_specification = ["fully_observable", "horizon"]
+GameType.provides_information_state_string = False
+GameType.provides_information_state_tensor = False
+GameType.provides_observation_string = False
+GameType.provides_observation_tensor = False
+GameType.provides_factored_observation_string = False
+GameType.reward_model = RewardModel.REWARDS
+GameType.short_name = "matching_pennies"
+GameType.utility = Utility.ZERO_SUM
+
+NumDistinctActions() = 2
+PolicyTensorShape() = [2]
+MaxChanceOutcomes() = 4
+GetParameters() = {fully_observable=False,horizon=10}
+NumPlayers() = 2
+MinUtility() = -10.0
+MaxUtility() = 20.0
+UtilitySum() = 0.0
+MaxGameLength() = 10
+ToString() = "matching_pennies()"
+
+# State 0
+# Total moves: 0
+# Most recent reward: 0
+# Total rewards: 0
+IsTerminal() = False
+History() = []
+HistoryString() = ""
+IsChanceNode() = False
+IsSimultaneousNode() = True
+CurrentPlayer() = -2
+Rewards() = [0.0, 0.0]
+Returns() = [0.0, 0.0]
+LegalActions(0) = [0, 1]
+LegalActions(1) = [0, 1]
+StringLegalActions(0) = ["0", "1"]
+StringLegalActions(1) = ["0", "1"]
+
+# Apply joint action ["0", "0"]
+actions: [0, 0]
+
+# State 1
+# Total moves: 1
+# Most recent reward: 1
+# Total rewards: 0
+IsTerminal() = False
+History() = [0, 0]
+HistoryString() = "0, 0"
+IsChanceNode() = True
+IsSimultaneousNode() = False
+CurrentPlayer() = -1
+ChanceOutcomes() = [(0, 1.0)]
+LegalActions() = [0]
+StringLegalActions() = ["0"]
+
+# Apply action "0"
+action: 0
+
+# State 2
+# Total moves: 1
+# Most recent reward: 1
+# Total rewards: 0
+IsTerminal() = False
+History() = [0, 0, 0]
+HistoryString() = "0, 0, 0"
+IsChanceNode() = True
+IsSimultaneousNode() = False
+CurrentPlayer() = -1
+ChanceOutcomes() = [(0, 1.0)]
+LegalActions() = [0]
+StringLegalActions() = ["0"]
+
+# Apply action "0"
+action: 0
+
+# State 3
+# Total moves: 1
+# Most recent reward: 1
+# Total rewards: 0
+IsTerminal() = False
+History() = [0, 0, 0, 0]
+HistoryString() = "0, 0, 0, 0"
+IsChanceNode() = False
+IsSimultaneousNode() = True
+CurrentPlayer() = -2
+Rewards() = [1.0, 1.0]
+Returns() = [0.0, 0.0]
+LegalActions(0) = [0, 1]
+LegalActions(1) = [0, 1]
+StringLegalActions(0) = ["0", "1"]
+StringLegalActions(1) = ["0", "1"]
+
+# Apply joint action ["0", "0"]
+actions: [0, 0]
+
+# State 4
+# Apply action "0"
+action: 0
+
+# State 5
+# Apply action "0"
+action: 0
+
+# State 6
+# Total moves: 2
+# Most recent reward: 2
+# Total rewards: 0
+IsTerminal() = False
+History() = [0, 0, 0, 0, 0, 0, 0, 0]
+HistoryString() = "0, 0, 0, 0, 0, 0, 0, 0"
+IsChanceNode() = False
+IsSimultaneousNode() = True
+CurrentPlayer() = -2
+Rewards() = [2.0, 2.0]
+Returns() = [0.0, 0.0]
+LegalActions(0) = [0, 1]
+LegalActions(1) = [0, 1]
+StringLegalActions(0) = ["0", "1"]
+StringLegalActions(1) = ["0", "1"]
+
+# Apply joint action ["0", "0"]
+actions: [0, 0]
+
+# State 7
+# Apply action "0"
+action: 0
+
+# State 8
+# Apply action "0"
+action: 0
+
+# State 9
+# Apply joint action ["0", "1"]
+actions: [0, 1]
+
+# State 10
+# Total moves: 4
+# Most recent reward: 3
+# Total rewards: 0
+IsTerminal() = True
+History() = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+HistoryString() = "0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1"
+IsChanceNode() = False
+IsSimultaneousNode() = False
+CurrentPlayer() = -4
+Rewards() = [3.0, 3.0]
+Returns() = [0.0, 0.0]

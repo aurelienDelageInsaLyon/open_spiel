@@ -1,0 +1,42 @@
+GMAA-ICE (JAIR 2013) using a BGIP-BnB solver and a QPOMDPhybrid heuristic
+GMAA Planner initialized
+Computing MonahanPOMDP with horizon 1
+MonahanPOMDPPlanner: t 0 contains < 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 > vectors (total 25)
+MonahanPOMDPPlanner[h=1]: Vjb0=0.37
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/GridSmall
+Results will not be stored to disk.
+QHybrid_QPOMDP_QAVMonahanPOMDP_hLT0 with 1 JAOH in tree (1 ts), and vectors for 1 ts.
+QPOMDPhybrid heuristic computed
+
+===================== GMAA run 1/1 starting
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 25, 2 >
+Maximum number of nodes that could have been expanded:
+< 625, 1250 >
+
+value=0.856
+OptimalValueDatabase: entry 'GridSmall 0.9 2'
+OptimalValueDatabase: Computed value matches with OptimalValueDatabase
+Running Simulation to determine control quality...
+Sampled value = 0.855184 (computed was 0.856)
+
+Cluster statistics:
+Number of joint types after clustering in each BG.
+timestep compressionRatio averageAfterClustering sizeWithoutClustering <all entries>
+1 1 4 4 < 4, 4 >
+
+===================== GMAA run 1/1 ended, Dec-POMDP value=0.856
+
+Summary of timing results:
+ComputeQ: 0 s in 1 measurements, max 0, avg 0, min 0
+Overall: 0.2 s in 1 measurements, max 0.2, avg 0.2, min 0.2
+Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+PlanningUnit: 0 s in 1 measurements, max 0, avg 0, min 0
+Simulation: 0.07 s in 1 measurements, max 0.07, avg 0.07, min 0.07
+GMAA::Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan::iteration: 0 s in 27 measurements, max 0, avg 0, min 0
+GMAA_MAAstarCluster::BGCluster_ts001: 0 s in 2 measurements, max 0, avg 0, min 0
+GMAA_MAAstarCluster::NextExact_ts000: 0 s in 25 measurements, max 0, avg 0, min 0
+GMAA_MAAstarCluster::NextExact_ts001: 0 s in 2 measurements, max 0, avg 0, min 0
+evaluateRandomPolicy sampled value: 0.201319

@@ -1,0 +1,8 @@
+Instantiating the problem...
+...done.
+QLearner: could not open /home/delage/.madp/results/QLearner/DecTiger/QLearner_DecTiger_g0.9__h2
+Results will not be stored to disk.
+SimulationDecPOMDPDiscrete: Set horizon to 175 (g 0.9 max|R| 101)
+Running q learning with nrRuns: 1000 and seed: 42
+Avg reward of 1000 simulations: 130.165
+

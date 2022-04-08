@@ -1,0 +1,36 @@
+GMAA-MAAstar (JAIR 2008)
+GMAA Planner initialized
+Computing MonahanBG with horizon 1
+MonahanBGPlanner: t 0 contains < 1 1 1 1 1 1 1 1 1 > vectors (total 9)
+MonahanBGPlanner[h=1]: Vjb0=5
+ERROR: mkdir error for /home/delage/.madp/results/GMAA/recycling
+Results will not be stored to disk.
+QHybrid_QBG_QAVMonahanBG_hLT0 with 1 JAOH in tree (1 ts), and vectors for 1 ts.
+QBGhybrid heuristic computed
+
+===================== GMAA run 1/1 starting
+GMAA_MAAstarClassic::ConstructAndValuateNextPolicies Last time step, found tight bound: found value v=6.8, parent (upperbound) value=6.8
+GMAA::Plan GMAA ENDED
+Expanded nodes at different stages:
+< 9, 1 >
+Maximum number of nodes that could have been expanded:
+<  >
+
+value=6.8
+OptimalValueDatabase: entry 'recycling 0.9 2'
+OptimalValueDatabase: Computed value matches with OptimalValueDatabase
+Running Simulation to determine control quality...
+Sampled value = 6.8324 (computed was 6.8)
+===================== GMAA run 1/1 ended, Dec-POMDP value=6.8
+
+Summary of timing results:
+ComputeQ: 0 s in 1 measurements, max 0, avg 0, min 0
+Overall: 0.12 s in 1 measurements, max 0.12, avg 0.12, min 0.12
+Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+PlanningUnit: 0 s in 1 measurements, max 0, avg 0, min 0
+Simulation: 0.11 s in 1 measurements, max 0.11, avg 0.11, min 0.11
+GMAA::NextExact_ts0: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::NextExact_ts1: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan: 0 s in 1 measurements, max 0, avg 0, min 0
+GMAA::Plan::iteration: 0 s in 2 measurements, max 0, avg 0, min 0
+evaluateRandomPolicy sampled value: 2.60095

@@ -14,6 +14,10 @@
 
 """Tests for open_spiel.python.pybind11.pyspiel."""
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import os
 from absl.testing import absltest
 
@@ -37,7 +41,6 @@ EXPECTED_GAMES = frozenset([
     "cliff_walking",
     "clobber",
     "coin_game",
-    "colored_trails",
     "connect_four",
     "coop_box_pushing",
     "coop_to_1p",
@@ -86,7 +89,6 @@ EXPECTED_GAMES = frozenset([
     "othello",
     "oware",
     "pentago",
-    "pathfinding",
     "phantom_ttt",
     "phantom_ttt_ir",
     "pig",
@@ -115,6 +117,9 @@ EXPECTED_GAMES = frozenset([
     "turn_based_simultaneous_game",
     "ultimate_tic_tac_toe",
     "y",
+    "matching_pennies",
+    "mabc",
+    "posg_from_file",
 ])
 
 
