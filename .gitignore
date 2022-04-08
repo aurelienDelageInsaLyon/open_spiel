@@ -36,6 +36,12 @@ open_spiel/games/universal_poker/double_dummy_solver/
 open_spiel/games/hanabi/hanabi-learning-environment/
 pybind11/
 
+#madp library
+madp-0.4.1/src/madp/.libs/libMADP.a
+madp-0.4.1/*/*/*/*.a
+*.a
+*.so
+
 # Install artifacts
 download_cache/
 get-pip.py
