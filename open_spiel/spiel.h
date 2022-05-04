@@ -432,11 +432,11 @@ class State {
         res.push_back(a);
       }
       else if (a.player == kChancePlayerId){
-        std::cout<<"\n player : " << player << " a : "<< a.action;// << " = ? " << (rollout_mode==player);
+        //std::cout<<"\n player : " << player << " a : "<< a.action;// << " = ? " << (rollout_mode==player);
         res.push_back(a);
       }
     }
-  std::cout << "\n end call full history(), retuns :  " << res;
+  //std::cout << "\n end call full history(), retuns :  " << res;
   return res;
   }
 

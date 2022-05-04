@@ -31,17 +31,17 @@ namespace posgFromFile {
 namespace {
 
 int kNumPlayers = 2;
-int kNumDistinctActions = 2;
+int kNumDistinctActions = 3;
 int kNumStates = 2;
-int kNumObservations = 4;
+int kNumObservations = 2;
 
 
 // Rewards.
-constexpr double kRMax = 3;
-constexpr double kRMin = -6;
+constexpr double kRMax = 10;
+constexpr double kRMin = -10;
 
 // Default parameters.
-constexpr int kDefaultHorizon = 3;
+constexpr int kDefaultHorizon = 4;
 constexpr bool kDefaultFullyObservable = false;
 
 // Facts about the game
@@ -70,6 +70,8 @@ std::shared_ptr<const Game> Factory(const GameParameters& params) {
 REGISTER_SPIEL_GAME(kGameType, Factory);
 
 ActionType ToAction(Action action) {
+  //function not used
+  SpielFatalError(absl::StrCat("Invalid action: ", action));
   switch (action) {
     case 0:
       return ActionType::kSend;
@@ -80,6 +82,7 @@ ActionType ToAction(Action action) {
 }
 
 std::string ActionToString(Action action) {
+  SpielFatalError(absl::StrCat("Invalid action: ", action));
   for (int i = 0; i< nbActions[0]; i++){
     if (action==i)
       return std::to_string(i);
@@ -94,6 +97,18 @@ std::string ActionToString(Action action) {
 
 std::vector<Action> observationToAction(Action z) {
   //std::cout << " z : " << z << " player : " << player;
+  int a = z-10;
+  a = (z-10)/nbObservations[1];//10 -> 0, 11 -> 0, 12-> 1, 13 -> 1
+  //std::cout << " \n  obs transf : " << z << "a : " << a;
+  //return ("z" + std::to_string(a) + "p0");
+  int b = (z-10)%nbObservations[0];
+  //b = b%nbObservations[0];//10->0, 11 -> 1, 12->0, 13->1
+  //std::cout << " \n  obs transf : " << z << "a : " << a;
+  //return ("z" + std::to_string(a) + "p1");
+  //}
+  //std::cout << "  obsToAct, z : " << z << " results in : " << a << "," << b;
+  return {a,b};
+  /*
   switch(z){
     case 10:
       return {0,0};
@@ -104,7 +119,7 @@ std::vector<Action> observationToAction(Action z) {
     case 13:
       return {1,1};
   }
-  return {98,99};
+  return {98,99};*/
 }
 
 std::string observationToString(Action z) {
@@ -161,16 +176,16 @@ std::string posgFromFileState::ActionToString(Player player, Action action) cons
   return std::to_string(action);
 }
 std::string posgFromFileState::observationToString(Action z,Player player) const {
-  std::cout << " z : " << z << " player : " << player;
+  //std::cout << " z : " << z << " player : " << player;
   if (player==0){
-      int a = z-10;
-      a = (z-10)/2;//10 -> 0, 11 -> 0, 12-> 1, 13 -> 1
+      //int a = z-10;
+      int a = (z-10)/nbObservations[1];//10 -> 0, 11 -> 0, 12-> 1, 13 -> 1
       //std::cout << " \n  obs transf : " << z << "a : " << a;
       return ("z" + std::to_string(a) + "p0");
   }
   else{
-      int a = z-10;
-      a = z%nbObservations[0];//10->0, 11 -> 1, 12->0, 13->1
+      int a = (z-10)%nbObservations[0];
+      //a = a%nbObservations[0];//10->0, 11 -> 1, 12->0, 13->1
       //std::cout << " \n  obs transf : " << z << "a : " << a;
       return ("z" + std::to_string(a) + "p1");
   }
@@ -186,6 +201,8 @@ std::string posgFromFileState::actionToString(Action action,Player player) const
       return ("a1p"+std::to_string(player));
     case 2:
       return ("a2p"+std::to_string(player));
+    case 3:
+      return ("a3p"+std::to_string(player));
   }
   SpielFatalError(absl::StrCat("Invalid action: ", action));
   return "invalid action";
@@ -223,8 +240,8 @@ void posgFromFileState::DoApplyActions(const std::vector<Action>& actions) {
   SPIEL_CHECK_EQ(actions.size(), 2);
   SPIEL_CHECK_EQ(cur_player_, kSimultaneousPlayerId);
   //std::cout << "simultaneous play \n";
+  evolveState(lastActions_);
   if (IsSimultaneousNode()){ 
-    evolveState(lastActions_);
     reward_+= posgFromFileState::resolveRewards(actions);
     cur_player_ = kChancePlayerId;
     //std::cout << "\n players played : " << actions << " at timestep " << timestep_<<"\n";
@@ -254,13 +271,15 @@ void posgFromFileState::DoApplyAction(Action action) {
 }
 
 void posgFromFileState::evolveState(const std::vector<Action>& actions){
-  std::cout << "\nevolving state\n" << std::flush;
+  //std::cout << "\n last actions : " << actions;
+  //std::cout << "\nevolving state\n" << std::flush;
   if (timestep_==0){
-    std::cout << "\n returning\n" << std::flush;  
+    //std::cout << "\n returning\n" << std::flush;  
     return;
   }
   Action lastJointObservation = lastObservations;
   std::vector<std::pair<Action, double>> valoutcomes = ChanceOutcomes();
+  //std::cout<< "chance outcomes : " << valoutcomes;
   double val = 0.0;
   for (int i = 0;i<valoutcomes.size();i++){
     if (valoutcomes[i].first==lastObservations){
@@ -268,7 +287,7 @@ void posgFromFileState::evolveState(const std::vector<Action>& actions){
     }
   }
   probHist_*=val;
-  std::cout << "\n val last obs : " << val << " actions : " << actions << " last obs : " << lastObservations;
+  //std::cout << "\n val last obs : " << val << " actions : " << actions << " last obs : " << lastObservations <<std::flush;
   //std::cout << "\n initialDistrib : " << distribHidden_States[0] << ", " << distribHidden_States[1] << ", " << distribHidden_States[2] << ", " << distribHidden_States[3];
   //std::cout << "distribHidden_States : " << distribHidden_States[0] << distribHidden_States[1] << distribHidden_States[2];
   std::map<int,double> res;
@@ -277,6 +296,7 @@ void posgFromFileState::evolveState(const std::vector<Action>& actions){
     for (int s = 0; s<nbStates;s++){
       //std::cout << "\n value transition : " << transitionFunction.at(std::make_pair(s,std::vector<Action>(actions))).at(nextS);
       //std::cout << "\n lastObservations : " <<observationToAction(lastObservations) << " from : " << lastObservations << std::flush;
+      //std::cout << " \n trying to access : " << observationToAction(lastObservations) << ", " << actions << " : " << nextS << std::flush;
         proba+=lastDistribHidden_States.at(s)
               *transitionFunction.at(std::make_pair(s,std::vector<Action>(actions))).at(nextS)
               *observationFunction.at(std::make_pair(observationToAction(lastObservations),actions)).at(nextS);
@@ -291,20 +311,21 @@ void posgFromFileState::evolveState(const std::vector<Action>& actions){
     }
   }
   distribHidden_States = res; 
-  std::cout << "\n actions : " << actions <<"evolves in : "  << distribHidden_States[0] << ", " << distribHidden_States[1] 
-  << ", " << distribHidden_States[2] <<", "<< distribHidden_States[3] << "with last obs : " << lastObservations << "\n" << std::flush;
+  //std::cout << "evolve state finished" << std::flush;
+  //std::cout << "\n actions : " << actions <<"evolves in : "  << distribHidden_States[0] << ", " << distribHidden_States[1] 
+  //<< ", " << distribHidden_States[2] <<", "<< distribHidden_States[3] << "with last obs : " << lastObservations << "\n" << std::flush;
 }
 
 
 double posgFromFileState::resolveRewards(const std::vector<Action>& actions){
-  if (timestep_==1 || timestep_==0){
-  std::cout << "\n distrib in get rewards: " << distribHidden_States[0] << distribHidden_States[1]<<"\n";
-  }
+  //if (timestep_==1 || timestep_==0){
+  //std::cout << "\n distrib in get rewards: " << distribHidden_States[0] << distribHidden_States[1]<<"\n";
+  //}
   double res = 0;
   for (int s=0;s<nbStates;s++){
     //if (rewardFunction.count(std::make_pair(s,actions))==1){
     if (distribHidden_States[s]>0.0 && distribHidden_States[s] < kRMax*100){
-      std::cout << "\ndistribHidden_States[s]" <<distribHidden_States[s];
+      //std::cout << "\ndistribHidden_States[s]" <<distribHidden_States[s];
       res +=distribHidden_States[s]*rewardFunction.at(std::make_pair(s,actions))*nbObservations[0]*nbObservations[1];
     }
     //}
@@ -315,7 +336,7 @@ double posgFromFileState::resolveRewards(const std::vector<Action>& actions){
       return 0.0;
     }*/
   }
-  std::cout << "\ncomputed rewards : " << res << " for actions : " << actions << "in state : " << distribHidden_States[0] << "," << distribHidden_States[1];
+  //std::cout << "\ncomputed rewards : " << res << " for actions : " << actions << "in state : " << distribHidden_States[0] << "," << distribHidden_States[1];
   return res;
 }
 
@@ -357,7 +378,7 @@ std::string posgFromFileState::map_to_string(std::map<hiddenState,double>  &m) c
 
 ActionsAndProbs posgFromFileState::ChanceOutcomes() const {
   std::vector<std::pair<Action, double>> res;
-  std::cout << "\n distrib : " << distribHidden_States.at(0) << "," << distribHidden_States.at(1);
+  //std::cout << "\n distrib : " << distribHidden_States.at(0) << "," << distribHidden_States.at(1);
   for (int z0 = 0; z0<nbObservations[0];z0++){
     for (int z1 = 0; z1<nbObservations[1];z1++){
       double proba = 0;
@@ -371,8 +392,8 @@ ActionsAndProbs posgFromFileState::ChanceOutcomes() const {
       res.push_back(std::make_pair(10+z0*nbObservations[1]+z1,proba));
     }
   }
-  std::cout << "\nchance observations :" << res[0].second <<","<<res[1].second <<","<< res[2].second <<","<< res[3].second
-    << " in state : " << distribHidden_States.at(0) << "," << distribHidden_States.at(1)<< " actions done : " << lastActions_ <<"\n"<<std::flush;
+  //std::cout << "\nchance observations :" << res[0].second <<","<<res[1].second <<","<< res[2].second <<","<< res[3].second
+  //  << " in state : " << distribHidden_States.at(0) << "," << distribHidden_States.at(1)<< " actions done : " << lastActions_ <<"\n"<<std::flush;
   return res;
 }
 
@@ -574,8 +595,49 @@ for (int z0 = 0; z0<nbObservations[0]; z0++){
     std::cout << "\n distribHiddenStates : " << t.first << " " 
               << t.second << "\n" ; 
     //distribHidden_States = {{hiddenState::s00,0.0}, {hiddenState::s01,0.0}, {hiddenState::s10,0.0},{hiddenState::s11,1.0}};
+  }
+
+  //checking symetries
+  bool checkSymetries = false;
+  if (checkSymetries){
+    for (int z0 = 0; z0<nbObservations[0]; z0++){
+        for (int z1 = 0; z1<nbObservations[1]; z1++){
+          for (int i = 0; i<nbActions[0]; i++){
+            for (int j = 0; j<nbActions[1]; j++){
+              for (int s = 0;s<nbStates;s++){
+                for (int nextS=0;nextS<nbStates;nextS++){
+                  if (res[std::make_pair(s,std::vector<Action>({i,j}))][nextS] != 
+                      res[std::make_pair(s,std::vector<Action>({j,i}))][nextS]){
+                    std::cout << "\n non symetric ! " << std::flush;
+                    std::cout<< "\n transition fonction for s,a,s' : " << s << i << j << nextS;
+                    exit(1);
+                  }
+                  if (resReward[std::make_pair(s,std::vector<Action>({i,j}))] !=
+                    -resReward[std::make_pair(s,std::vector<Action>({j,i}))]){
+                    std::cout << "\n non symetric ! " << std::flush;
+                    std::cout<< "\n reward fonction for s,a,s' : " << s << i << j;
+                    std::cout << "\n vals : " <<  resReward[std::make_pair(s,std::vector<Action>({i,j}))] << " , " 
+                    << resReward[std::make_pair(s,std::vector<Action>({j,i}))];
+                    exit(1);
+                  }
+                  if (resObservation[std::make_pair(std::vector<Action>({z0,z1}),std::vector<Action>({i,j}))][nextS]
+                    != resObservation[std::make_pair(std::vector<Action>({z1,z0}),std::vector<Action>({j,i}))][nextS]){
+                    std::cout << "\n non symetric ! " << std::flush;
+                    std::cout << "\n obs function for s,z,s' : " << s << z0 << z1 << nextS;
+                    std::cout << "\n vals : " << resObservation[std::make_pair(std::vector<Action>({z0,z1}),std::vector<Action>({i,j}))][nextS]
+                    << " , " << resObservation[std::make_pair(std::vector<Action>({z0,z1}),std::vector<Action>({j,i}))][nextS];
+                    exit(1);
+                  } 
+                }
+              }
             }
+          }
+        }
       }
+    }
+    //exit(1);
+}
+
 
 std::vector<int> posgFromFileGame::ObservationTensorShape() const {
   if (fully_observable_) {

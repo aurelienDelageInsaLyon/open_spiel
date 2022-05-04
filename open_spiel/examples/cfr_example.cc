@@ -37,18 +37,19 @@ int main(int argc, char** argv) {
   auto time_left = std::chrono::steady_clock::now();
   float val = 0.0;
   
-  while (i<10){
+  while (val <60*60){
     solver.EvaluateAndUpdatePolicy();
 
     i++;
     auto time_left = std::chrono::steady_clock::now();
     val = std::chrono::duration_cast<std::chrono::nanoseconds>(time_left - start).count()*1e-9;
-    //std::cout << "time taken : " << val;
-  }
-
+    std::cout << "time taken : " << val;
     double exploitability = open_spiel::algorithms::Exploitability(
           *game, *solver.AveragePolicy());
 
-    std::cout << "Iteration " << i << " exploitability=" << exploitability;
+    std::cout << "\nIteration " << i << " exploitability=" << exploitability<< " time : " << val;
     std::cout << "\n\n average policy : " << solver.TabularAveragePolicy().ToString();
+  }
+
+    
 }
