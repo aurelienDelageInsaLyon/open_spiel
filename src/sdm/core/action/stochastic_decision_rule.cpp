@@ -13,6 +13,25 @@ namespace sdm
         throw sdm::exception::NotImplementedException("NotImplementedException raised in StochasticDecisionRule::act");
     }
 
+    std::shared_ptr<Action> StochasticDecisionRule::act(const std::shared_ptr<HistoryInterface> &state) const
+    {
+        // return this->at(s);
+        throw sdm::exception::NotImplementedException("NotImplementedException raised in StochasticDecisionRule::act");
+    }
+
+    std::shared_ptr<std::vector<std::pair<Action,double>>> StochasticDecisionRule::actStochastically(const std::shared_ptr<HistoryInterface> &state) const
+    {
+        // return this->at(s);
+        throw sdm::exception::NotImplementedException("NotImplementedException raised in StochasticDecisionRule::act");
+    }
+
+
+    std::shared_ptr<Action> act(const std::shared_ptr<HistoryInterface> &state)
+    {
+        // return this->at(s);
+        throw sdm::exception::NotImplementedException("NotImplementedException raised in StochasticDecisionRule::act");
+    }
+
     // template <typename std::shared_ptr<State>, typename std::shared_ptr<Action>>
     // std::shared_ptr<Action> StochasticDecisionRule::operator()(const std::shared_ptr<State> &s)
     // {
@@ -20,11 +39,11 @@ namespace sdm
     //     throw sdm::exception::NotImplementedException();
     // }
 
-    RecursiveMap<std::shared_ptr<Action>, double> StochasticDecisionRule::getProbabilities(const std::shared_ptr<State> &state) const
+    std::map<std::shared_ptr<Action>,double> StochasticDecisionRule::getProbabilities(const std::shared_ptr<HistoryInterface> &state) const
     {
         try
         {
-            return this->at(state);
+            return this->stratMap.at(state);
         }
         catch(const std::exception& e)
         {
@@ -33,8 +52,9 @@ namespace sdm
         }
     }
 
-    double StochasticDecisionRule::getProbability(const std::shared_ptr<State> &state, const std::shared_ptr<Action> &action) const
+    double StochasticDecisionRule::getProbability(const std::shared_ptr<HistoryInterface> &state, const std::shared_ptr<Action> &action) const
     {
+
         try
         {
             return this->getProbabilities(state).at(action);
@@ -46,16 +66,29 @@ namespace sdm
         }
     }
 
-    void StochasticDecisionRule::setProbability(const std::shared_ptr<State> &state, const std::shared_ptr<Action> &action, double proba)
+    void StochasticDecisionRule::setProbability(const std::shared_ptr<HistoryInterface> &state, const std::shared_ptr<Action> &action, double proba)
     {
-        (*this)[state][action] = proba;
+        this->stratMap[state][action] = proba;
     }
+
+    std::vector<std::shared_ptr<Action>> StochasticDecisionRule::getActions(const std::shared_ptr<HistoryInterface> &state) const
+    {
+        std::vector<std::shared_ptr<Action>> res;
+
+        for (auto &act : this->stratMap.at(state)){
+            if (act.second>0.0){
+            res.push_back(act.first);
+            }
+        }
+        return res;
+    }
+
 
     std::string StochasticDecisionRule::str() const
     {
         std::ostringstream res;
         res << "<decision-rule type=\"stochastic\">" << std::endl;
-        for (const auto &pair_state__pair_action__proba : *this)
+        for (const auto &pair_state__pair_action__proba : this->stratMap)
         {
             res << "\t<decision state=\"" << pair_state__pair_action__proba.first->str() << "\">" << std::endl;
 

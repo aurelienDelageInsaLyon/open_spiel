@@ -50,7 +50,6 @@ namespace sdm
     {
     public:
         virtual ~State() {}
-
         /**
          * @brief Compute the dot product operation with an alpha vector.
          *

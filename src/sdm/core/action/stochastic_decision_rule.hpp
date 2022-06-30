@@ -7,6 +7,7 @@
 #include <sdm/utils/struct/recursive_map.hpp>
 #include <sdm/utils/linear_algebra/mapped_vector.hpp>
 #include <sdm/tools.hpp>
+#include <sdm/core/state/interface/history_interface.hpp>
 
 /**
  * @brief Namespace grouping all tools required for sequential decision making.
@@ -21,9 +22,12 @@ namespace sdm
    * @tparam std::shared_ptr<State> the state type
    * @tparam std::shared_ptr<Action> the action type
    */
-    class StochasticDecisionRule : public DecisionRule, public RecursiveMap<std::shared_ptr<State>, std::shared_ptr<Action>, double>
+    class StochasticDecisionRule : public DecisionRule//, public RecursiveMap<std::shared_ptr<State>, 
+    //std::shared_ptr<Action>, double>
     {
     public:
+        std::map<std::shared_ptr<HistoryInterface>,std::map<std::shared_ptr<Action>,double>> stratMap;
+
         using input_type = typename DecisionRule::input_type;
         using output_type = typename DecisionRule::output_type;
 
@@ -37,6 +41,10 @@ namespace sdm
          */
         std::shared_ptr<Action> act(const std::shared_ptr<State> &s) const;
 
+        std::shared_ptr<Action> act(const std::shared_ptr<HistoryInterface> &state) const;
+
+        std::shared_ptr<std::vector<std::pair<Action,double>>> actStochastically(const std::shared_ptr<HistoryInterface> &state) const;
+
         // /**
         //  * @brief Apply the DetDecisionRule function (similar to `act` or even `at`)
         //  * 
@@ -45,9 +53,14 @@ namespace sdm
         //  */
         // std::shared_ptr<Action> operator()(const std::shared_ptr<State> &s);
 
-        RecursiveMap<std::shared_ptr<Action>, double> getProbabilities(const std::shared_ptr<State> &state) const;
+        std::map<std::shared_ptr<Action>,double> getProbabilities(const std::shared_ptr<HistoryInterface> &state) const;
 
-        double getProbability(const std::shared_ptr<State> &state, const std::shared_ptr<Action> &action) const;
+        double getProbability(const std::shared_ptr<HistoryInterface> &state, const std::shared_ptr<Action> &action) const;
+
+        void setProbability(const std::shared_ptr<HistoryInterface> &state, const std::shared_ptr<Action> &action, double proba);
+
+
+        std::vector<std::shared_ptr<Action>> getActions(const std::shared_ptr<HistoryInterface> &state) const;
 
         /**
          * @brief Sets the probability of selecting action a when observing state s.
@@ -66,5 +79,6 @@ namespace sdm
             return os;        
         }
     };
+
 
 } // namespace sdm
