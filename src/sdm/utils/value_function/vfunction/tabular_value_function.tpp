@@ -37,6 +37,7 @@ namespace sdm
     template <class Hash, class KeyEqual>
     void BaseTabularValueFunction<Hash, KeyEqual>::initialize(double default_value, number t)
     {
+       // std::cout << "\n tabular value function asked to initialize with default value : " << default_value;
         this->representation[this->isInfiniteHorizon() ? 0 : t] = Container(default_value);
     }
 

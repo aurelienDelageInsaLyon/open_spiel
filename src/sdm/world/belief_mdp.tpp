@@ -1,7 +1,7 @@
 #include <sdm/core/state/belief_state.hpp>
 #include <sdm/utils/struct/graph.hpp>
 #include <sdm/world/registry.hpp>
-
+#include <sdm/core/state/private_br_occupancy_state.hpp>
 namespace sdm
 {
 
@@ -85,13 +85,23 @@ namespace sdm
     template <class TBelief>
     Pair<std::shared_ptr<State>, double> BaseBeliefMDP<TBelief>::computeNextStateAndProbability(const std::shared_ptr<State> &belief, const std::shared_ptr<Action> &action, const std::shared_ptr<Observation> &observation, number t)
     {
+        //std::cout << "\n blabla i'm here\n" << std::flush;
+        //std::cout << "\n belief : " << belief;
+        //std::exit(1);
+
         // Compute next state
         if (this->batch_size_ == 0)
         {
+            //std::cout << " normally i should call next "<< std::flush;
+            //std::cout << belief->str() << std::flush << std::endl;
+
             return belief->next(this->mdp, action, observation, t);
+            //std::cout << " end calling next " << std::flush << std::endl;
+
         }
         else
         {
+            //std::cout << " weird, normally i should call next " << std::flush << std::endl;
             return this->computeSampledNextState(belief, action, observation, t);
         }
     }
@@ -141,6 +151,7 @@ namespace sdm
     template <class TBelief>
     Pair<std::shared_ptr<State>, double> BaseBeliefMDP<TBelief>::getNextStateAndProba(const std::shared_ptr<State> &belief, const std::shared_ptr<Action> &action, const std::shared_ptr<Observation> &observation, number t)
     {
+        //std::cout << "\n baseBeliefMdp : action : " << action->str() << " and observation : " << observation->str()<< std::flush;
         auto action_observation = std::make_pair(action, observation);
 
         // If we store data in the graph
@@ -158,6 +169,8 @@ namespace sdm
             }
             else
             {
+                //std::cout << "trying to compute next state and proba" << std::flush;
+
                 // Build next belief and proba
                 auto [computed_next_belief, next_belief_probability] = this->computeNextStateAndProbability(belief, action, observation, t);
 
@@ -165,8 +178,13 @@ namespace sdm
                 this->transition_probability[belief][action][observation] = next_belief_probability;
 
                 // Check if the next belief is already in the graph
+                //std::cout << "\n computed next belief : " << typeid(computed_next_belief).name();
+                auto bla = std::dynamic_pointer_cast<PrivateBrOccupancyState>(computed_next_belief);
+                //std::cout << "\n is bla null?"<< bla << std::flush;
+                //std::exit(1);
                 TBelief b = *std::dynamic_pointer_cast<TBelief>(computed_next_belief);
-
+                //std::cout << "\n is b null?" << b<<std::flush;
+                //std::exit(1);
                 if (this->state_space_.find(b) == this->state_space_.end())
                 {
                     // Add the belief in the space of beliefs
@@ -212,6 +230,8 @@ namespace sdm
     template <class TBelief>
     double BaseBeliefMDP<TBelief>::getReward(const std::shared_ptr<State> &belief, const std::shared_ptr<Action> &action, number t)
     {
+        //std::cout<< "\n i'm in get reward from belief_mdp !" << std::flush << std::endl;
+        //std::exit(1);
         double reward = 0.;
 
         if (this->store_states_ && this->store_actions_)
@@ -235,7 +255,7 @@ namespace sdm
         {
             reward = belief->getReward(this->mdp, action, t);
         }
-
+        //std::cout<< "\n i'm leaving get reward from belief_mdp !" << std::flush << std::endl;
         return reward;
     }
 

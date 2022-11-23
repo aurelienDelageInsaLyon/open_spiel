@@ -1,0 +1,43 @@
+Correction IAT 5
+
+Cl ́ement CHAZALET, Th ́eo GROSPERRIN, Reynald LAMBOLEZ, Milan PORT-LEVET
+
+# Rappel : 
+le projet est notÃ© sur 20, deux points bonus pour l'utilisation de Tensorflow & 2 points bonus pour les rÃ©sultats de l'apprentissage.
+
+# CompÃ©tences de communication (4pts)
+4/4
+
+* PrÃ©sentation, orthographe, grammaire (malus de 1pts ou 0pts)
+* QualitÃ© gÃ©nÃ©rale de la prÃ©sentation
+* PrÃ©cision de l'explication scientifique
+
+
+# CompÃ©tences scientifiques (8pts)
+
+* est-ce que le code tourne et montre un apprentissage de l'agent? (2pts)
+2
+* formalisaiton & pertinence du choix de l'Ã©tat (2pts)
+1
+* pertinence de la justification du choix d'algorithme (2pts)
+1
+* analyse scientifiquement crÃ©dible des rÃ©sultats & recul pris (2pts)
+1
+
+# CompÃ©tences mÃ©thodologiques (8pts)
+
+* analyse du processus d'apprentissage (2pts)
+1
+* qualitÃ© de la mÃ©thode d'optimisation des hyperparamÃ¨tres (2pts)
+1
+* qualitÃ© de la mÃ©thode d'optimisation de l'Ã©tat (2pts)
+1
+* mise en place d'une automatisation des tests d'apprentissage (2pts)
+1 (l’idée y est)
+
+Bonus : 0.5 pour la recherche biblio
+Total : 13.5/20
+
+Appréciation globale 
+	⁃	L’interprétation de l’hyperparametre $\alpha$ est erronée.
+	⁃	La justification de l’algorithme est légère, mais présente.

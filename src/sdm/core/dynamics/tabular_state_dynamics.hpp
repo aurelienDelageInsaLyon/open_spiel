@@ -84,7 +84,6 @@ namespace sdm
      */
     std::shared_ptr<Distribution<std::shared_ptr<State>>> getNextStateDistribution(const std::shared_ptr<State> &state, const std::shared_ptr<Action> &action, number t = 0) const;
 
-  protected:
     void updateNextStateDistribution(const std::shared_ptr<State> &state, const std::shared_ptr<Action> &action, const std::shared_ptr<State> &next_state, double proba);
 
     /** @brief transition and observation matrices */

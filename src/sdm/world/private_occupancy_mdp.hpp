@@ -36,6 +36,9 @@ namespace sdm
                 BasePrivateOccupancyMDP(const std::shared_ptr<MPOMDPInterface> &decpomdp, const number num_player_ , Config config);
                 BasePrivateOccupancyMDP(const std::shared_ptr<MPOMDPInterface> &decpomdp, const number num_player_, int memory = -1,
                                  bool store_states = true, bool store_actions = true, int batch_size = 0);
+                
+                BasePrivateOccupancyMDP(const std::shared_ptr<MPOMDPInterface> &decpomdp, std::shared_ptr<StochasticDecisionRule> stratOpponent, const number num_player_, int memory = -1,
+                                 bool store_states = true, bool store_actions = true, int batch_size = 0);
 
                 ~BasePrivateOccupancyMDP();
 
@@ -76,6 +79,9 @@ namespace sdm
                  * @return the space of actions of the central planner.
                  *
                  */
+                /*
+                virtual std::shared_ptr<Space> getBaseActionSpaceAt(const std::shared_ptr<State> &occupancy_state, number t = 0);*/
+
                 virtual std::shared_ptr<Space> getActionSpaceAt(const std::shared_ptr<State> &occupancy_state, number t = 0);
 
                 /**
@@ -88,6 +94,8 @@ namespace sdm
                 // **********************
 
                 virtual double do_excess(double incumbent, double lb, double ub, double cost_so_far, double error, number horizon);
+                
+                double getReward(const std::shared_ptr<State> &belief, const std::shared_ptr<Action> &action, number t);
 
                 // *****************
                 //    RL methods
@@ -103,9 +111,13 @@ namespace sdm
 
                 std::shared_ptr<PrivateBrOccupancyState> initial_state_;
 
+                std::shared_ptr<State> getInitialState();
+
+                std::shared_ptr<StochasticDecisionRule> stratOpponent;
+
         protected:
 
-
+                
                 /** @brief The underlying well defined MPOMDP */
                 std::shared_ptr<MPOMDPInterface> decpomdp;
 
@@ -127,7 +139,7 @@ namespace sdm
                 virtual std::shared_ptr<Space> computeActionSpaceAt(const std::shared_ptr<State> &occupancy_state, number t = 0);
         };
 
-        using PrivateOccupancyMDP = BasePrivateOccupancyMDP<OccupancyState>;
+        using PrivateOccupancyMDP = BasePrivateOccupancyMDP<PrivateBrOccupancyState>;
 } // namespace sdm
 
 #include <sdm/world/private_occupancy_mdp.tpp>

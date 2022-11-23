@@ -61,8 +61,6 @@ namespace sdm
 
     void HSVI::explore(const std::shared_ptr<State> &state, double cost_so_far, number t)
     {
-        try
-        {
             if (!stop(state, cost_so_far, t))
             {
                 if (value_function->isInfiniteHorizon())
@@ -72,27 +70,35 @@ namespace sdm
                 }
 
                 // Select next action
+                //std::cout << "getting greedy actionand value";
                 auto [action, value] = getUpperBound()->getGreedyActionAndValue(state, t);
-
+                //std::cout << "greedyaction : " << action->str();
+                //std::cout << "succeeded to get action";
+                //std::exit(1);
                 // Select next observation
                 for (const auto &observation : selectObservations(state, action, t))
                 {
-                    // Determine the state for a given state, action and observation
+                    //std::cout << "observation (should be a public one for Pnegi)" << *observation << std::flush;
+
                     auto next_state = getWorld()->getNextStateAndProba(state, action, observation, t).first;
                     // Recursive explore
+                    //std::cout << "\n next state : " << next_state->str();
                     explore(next_state, cost_so_far + getWorld()->getDiscount(t) * getWorld()->getReward(state, action, t), t + 1);
                 }
-
+                //std::exit(1);
                 // Update the value function (backward update)
                 this->updateValue(state, t);
             }
-        }
+            if (t==0){
+                this->optimum = getUpperBound()->getGreedyActionAndValue(state, t).second;
+            }
+        /*}
         catch (const std::exception &exc)
         {
             // Catch anything thrown within try block that derives from std::exception
             std::cerr << "TSVI::explore(..) exception caught: " << exc.what() << std::endl;
             exit(-1);
-        }
+        }*/
     }
 
     // SELECT ACTIONS IN HSVI
@@ -109,19 +115,23 @@ namespace sdm
 
         // Select next observation
         auto observation_space = getWorld()->getObservationSpaceAt(state, action->toAction(), t);
+        double prob_obs = 0.0;
         for (const auto &observation : *observation_space)
         {
             // Get the next state and probability
             auto [next_state, transition_proba] = getWorld()->getNextStateAndProba(state, action->toAction(), observation->toObservation(), t);
-
+            
             // Compute error correlated to this next state
             error = transition_proba * excess(next_state, 0, t + 1);
             if (error > biggest_error)
             {
                 biggest_error = error;
                 selected_observation = observation->toObservation();
+                prob_obs = transition_proba;
+                
             }
         }
+        //std::cout << "\n hsvi::selected proba obs : " << prob_obs<<std::endl;
         return {selected_observation};
     }
 
@@ -157,7 +167,7 @@ namespace sdm
     {
         // ************* Global Logger ****************
         // Text Format for standard output stream
-        std::string format = "\r" + config::LOG_SDMS + "Trial {:<8} Error {:<12.4f} Value_LB {:<12.4f} Value_UB {:<12.4f} Size_LB {:<10} Size_UB {:<10} Time {:<12.4f}";
+        std::string format = "\r" + config::LOG_SDMS + "Trial {:<8} Error {:<12.4f} Value_LB {:<12.7f} Value_UB {:<12.7f} Size_LB {:<10} Size_UB {:<10} Time {:<12.4f}";
 
         // Titles of logs
         std::vector<std::string> list_logs{"Trial", "Error", "Value_LB", "Value_UB", "Size_LB", "Size_UB", "Time"};
@@ -183,14 +193,14 @@ namespace sdm
     void HSVI::logging()
     {
         auto initial_state = getWorld()->getInitialState();
-
+        
         if (auto derived = std::dynamic_pointer_cast<BeliefMDPInterface>(getWorld()))
         {
             // Print in loggers some execution variables
             logger->log(trial,
                         excess(initial_state, 0, 0) + error,
-                        getLowerBound()->getValueAt(initial_state),
-                        getUpperBound()->getValueAt(initial_state),
+                        -this->agent_id_*(getLowerBound()->getValueAt(initial_state)),
+                        -this->agent_id_*(getUpperBound()->getValueAt(initial_state)),
                         getLowerBound()->getSize(),
                         getUpperBound()->getSize(),
                         getExecutionTime(),
@@ -201,8 +211,8 @@ namespace sdm
             // Print in loggers some execution variables
             logger->log(trial,
                         excess(initial_state, 0, 0) + error,
-                        getLowerBound()->getValueAt(initial_state),
-                        getUpperBound()->getValueAt(initial_state),
+                        -this->agent_id_*(getLowerBound()->getValueAt(initial_state))*4/10,
+                        -this->agent_id_*(getUpperBound()->getValueAt(initial_state))*4/10,
                         getLowerBound()->getSize(),
                         getUpperBound()->getSize(),
                         getExecutionTime());

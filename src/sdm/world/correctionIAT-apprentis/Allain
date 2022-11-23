@@ -1,0 +1,52 @@
+Correction IAT  1 
+
+Allain Pierrick, Delalande Hugo, Djafer Bryan, Willay Gaël
+
+NOTE FINALE : 15.5/20
+
+
+
+# Rappel : 
+le projet est notÃ© sur 20, deux points bonus pour l'utilisation de Tensorflow & 2 points bonus pour les rÃ©sultats de l'apprentissage.
+
+# CompÃ©tences de communication (4pts)
+4/4
+* PrÃ©sentation, orthographe, grammaire (malus de 1pts ou 0pts)
+* QualitÃ© gÃ©nÃ©rale de la prÃ©sentation
+* PrÃ©cision de l'explication scientifique
+
+
+# CompÃ©tences scientifiques (8pts)
+
+* est-ce que le code tourne et montre un apprentissage de l'agent? (2pts)
+2
+* formalisaiton & pertinence du choix de l'Ã©tat (2pts)
+2
+* pertinence de la justification du choix d'algorithme (2pts)
+1.5
+* analyse scientifiquement crÃ©dible des rÃ©sultats & recul pris (2pts)
+1.5
+# CompÃ©tences mÃ©thodologiques (8pts)
+
+* analyse du processus d'apprentissage (2pts)
+1
+* qualitÃ© de la mÃ©thode d'optimisation des hyperparamÃ¨tres (2pts)
+1
+* qualitÃ© de la mÃ©thode d'optimisation de l'Ã©tat (2pts)
+1
+* mise en place d'une automatisation des tests d'apprentissage (2pts)
+0
+
+Appréciation globale :
+Le groupe s’est attaqué à la version la plus dure du projet, celle utilisant un réseau de neurone. La justification de ce choix est crédible (même si légère). 
+En revanche, le groupe a mené à bien la méthodologie particulière associée à un rdn (modification de l’architecture, des hyperparametres,...), ce qui est apprécié.
+L’analyse des résultats est légère, mais présente. La recherche d’un état optimal est légère, mais présente.
+Utiliser un rdn pour du q-learning complexifie beaucoup de choses. C’est normal si, sur un temps de projet aussi court, les résultats n’aient pas été satisfaisants.
+En bref: un bon projet, intéressant et crédible même en s’étant attaqué à l’algo dqn.
+
+Bonus : 0.5 pour la vidéo. Ça montre que le groupe a cherché à visualiser le comportement de l’agent pour essayer de comprendre l’apprentissage.
+
+Total 15.5/20
+
+# Rappel : 
+le projet est notÃ© sur 20, deux points bonus pour l'utilisation de Tensorflow & 2 points bonus pour les rÃ©sultats de l'apprentissage.

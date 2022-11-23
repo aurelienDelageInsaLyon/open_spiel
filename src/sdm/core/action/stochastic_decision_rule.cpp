@@ -5,8 +5,25 @@
 
 namespace sdm
 {
-    StochasticDecisionRule::StochasticDecisionRule() {}
 
+    StochasticDecisionRule::StochasticDecisionRule(){
+    
+    }
+
+    StochasticDecisionRule::StochasticDecisionRule(int nb){
+        this->numActions=nb;
+    }
+
+    StochasticDecisionRule::StochasticDecisionRule(DiscreteSpace action_space) : action_space(action_space){
+        
+        this->numActions = action_space.getNumItems();
+
+    }
+
+    StochasticDecisionRule::StochasticDecisionRule(std::vector<std::shared_ptr<Item>> listHistories, std::vector<std::pair<std::shared_ptr<Action>,double>> probaActionsForHistories)
+    {
+        throw sdm::exception::NotImplementedException("NotImplementedException raised in StochasticDecisionRule::constructor(listHistories,probaActionsForHistories)");
+    }
     std::shared_ptr<Action> StochasticDecisionRule::act(const std::shared_ptr<State> &) const
     {
         // return this->at(s);
@@ -54,35 +71,77 @@ namespace sdm
 
     double StochasticDecisionRule::getProbability(const std::shared_ptr<HistoryInterface> &state, const std::shared_ptr<Action> &action) const
     {
-
-        try
-        {
+        //std::cout << "numActions : " << this->numActions;
+        
+        //std::cout << "\n asking for o : " << state->short_str();
+        
+        
+      //std::cout << "\n state : " << state->str();
+        if (this->stratMap.count(state)){
+            //std::cout << "\n returning proba : "  << this->getProbabilities(state).at(action);
             return this->getProbabilities(state).at(action);
         }
-        catch(const std::exception& e)
+        for(const auto & it :stratMap)
         {
-            std::cerr <<"Action not found in the StochasticDecisionRule::getProbability"<< e.what() << '\n';
-            exit(-1);
+            //std::cout << "\n hist in map : " << it.first->str()<<std::flush;// << " " << it.second.str();// << " " << it->second.second << "\n";
+            
+            if(state->short_str()==it.first->short_str()){
+                //std::cout << "\n WARNING : this test of str() of histories is weird unless you have initialized two different mdps" << std::flush;
+                for (auto & tmp : it.second){
+                    //std::cout << "\n tmp : " << tmp.first->str()<<std::flush;
+                    //std::cout << "\n asking for action : " << action->str() << " and tmp : " << tmp.first->str();
+                    if (tmp.first->str()==action->str()){
+                        return tmp.second;
+                    }
+                }
+                return 0.0;
+                return it.second.at(action);
+            }
         }
+        //std::cout << "\n stochastic DR returning random uniform probability";
+        return 1/(double)this->numActions;
     }
-
+    
     void StochasticDecisionRule::setProbability(const std::shared_ptr<HistoryInterface> &state, const std::shared_ptr<Action> &action, double proba)
     {
         this->stratMap[state][action] = proba;
     }
 
+void StochasticDecisionRule::setProbability(const std::shared_ptr<HistoryTree> &state, const std::shared_ptr<Action> &action, double proba)
+    {
+        this->stratMap[state][action] = proba;
+    }
+
+
     std::vector<std::shared_ptr<Action>> StochasticDecisionRule::getActions(const std::shared_ptr<HistoryInterface> &state) const
     {
         std::vector<std::shared_ptr<Action>> res;
 
-        for (auto &act : this->stratMap.at(state)){
-            if (act.second>0.0){
-            res.push_back(act.first);
+        if (this->stratMap.count(state)){
+
+            for (auto &act : this->stratMap.at(state)){
+                if (act.second>0.0){
+                res.push_back(act.first);
+                }
             }
+            return res;
         }
         return res;
     }
 
+    void StochasticDecisionRule::testValidity(){
+        for (auto & hist : this->stratMap){
+            double val = 0.0;
+            for (auto & key : hist.second){
+                val+=key.second;
+            }
+            if (val >1.001 || val < 0.999){
+                std::cout << "\n bug validity strat" << " val : " << val;
+                std::cout << this->str();
+                std::exit(1);
+            }
+        }
+    }
 
     std::string StochasticDecisionRule::str() const
     {

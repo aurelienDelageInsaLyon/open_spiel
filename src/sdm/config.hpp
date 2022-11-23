@@ -16,22 +16,22 @@ namespace sdm
         // ----------------------------------------------------
 
         /** @brief Precision used to compare SDMS vectors */
-        const double PRECISION_SDMS_VECTOR = 0.0001;
+        const double PRECISION_SDMS_VECTOR = 0.0000001;
 
         /** @brief Precision used to compare Mapped vectors */
-        const double PRECISION_MAPPED_VECTOR = 0.0001;
+        const double PRECISION_MAPPED_VECTOR = 0.000001;
         
         /** @brief Precision used to compare vectors interface */
         const double PRECISION_VECTO_INTERFACE = PRECISION_MAPPED_VECTOR;
 
         /** @brief Precision used to compare beliefs */
-        const double PRECISION_BELIEF = 0.001;
+        const double PRECISION_BELIEF = 0.0000001;
         
         /** @brief Precision used to compare occupancy states */
-        const double PRECISION_OCCUPANCY_STATE = 0.001;
+        const double PRECISION_OCCUPANCY_STATE = 0.0000001;
         
         /** @brief Precision of the compression */
-        const double PRECISION_COMPRESSION = 0.1;
+        const double PRECISION_COMPRESSION = 0.0000001;
 
 
 

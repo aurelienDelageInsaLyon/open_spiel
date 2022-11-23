@@ -38,8 +38,8 @@ namespace sdm
          * @brief Build HSVI algorithm.
          */
         std::shared_ptr<sdm::HSVI> makeHSVI(std::shared_ptr<SolvableByHSVI> problem,
-                                            double error = 0.01,
-                                            int trials = 10000,
+                                            double error = 0.00000001,
+                                            int trials = 1000000,
                                             bool store_state = true,
                                             bool store_action = true,
                                             std::string name = "hsvi",
@@ -138,8 +138,8 @@ namespace sdm
                                         std::string formalism_name,
                                         number horizon = 10,
                                         double discount = 1.,
-                                        double error = 0.01,
-                                        int trials = 10000,
+                                        double error = 0.00000001,
+                                        int trials = 10000000,
                                         double time_max = 3600 /* 1h */ * 10,
                                         std::string name = "",
                                         int memory = -1,

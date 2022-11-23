@@ -26,6 +26,8 @@ namespace sdm
 
     void ValueFunctionInterface::initialize()
     {
+        std::cout << "trying to initialize value function in value_function_interface, i'm exiting";
+        std::exit(1);
         this->getInitializer()->init(this->getptr());
     }
 

@@ -4,13 +4,14 @@
 namespace sdm
 {
     ValueIteration::ValueIteration(std::shared_ptr<SolvableByHSVI> world, std::shared_ptr<ValueFunction> value_function, double error, double time_max, std::string name)
-        : DynamicProgramming(world, error, name), value_function(value_function), time_max(time_max)
+        : DynamicProgramming(world, error, name), tmp_value_function(value_function), time_max(time_max)
     {
     }
 
     void ValueIteration::initialize()
     {
         initLogger();
+        std::cout << "tmp_value_function : " << tmp_value_function << std::flush;
         tmp_value_function->initialize();
     }
 

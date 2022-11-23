@@ -62,6 +62,9 @@ namespace sdm
         std::shared_ptr<HistoryInterface> getPreviousHistory();
 
         std::shared_ptr<Observation> getLastObservation();
+        
+
+        std::shared_ptr<Action> getLastAction();
 
         number getHorizon() const;
 
@@ -78,6 +81,10 @@ namespace sdm
 
         std::shared_ptr<HistoryTree> getptr();
         std::shared_ptr<HistoryTree> getParent() const;
+        void setParent(std::shared_ptr<HistoryTree> p){
+            this->parent_=p;
+        }
+
         std::shared_ptr<HistoryTree> getOrigin();
         std::vector<std::shared_ptr<HistoryTree>> getChildren() const;
         std::shared_ptr<HistoryTree> getChild(const Pair<std::shared_ptr<Observation>, std::shared_ptr<Action>> &obs_act) const;
@@ -159,6 +166,7 @@ namespace sdm
                 this->children_.emplace(obs_action, child);
                 return child;
             }
+
             return std::make_shared<output>(this->getptr(), obs_action);
         }
 

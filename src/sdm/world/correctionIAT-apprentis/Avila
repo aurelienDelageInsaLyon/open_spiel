@@ -1,0 +1,51 @@
+Correction IAT 4
+
+AVILA Esteban, JARJAT Lucas, DIALLO Maimouna-Bella, ZONGO Abdel
+
+
+# Rappel : 
+le projet est notÃ© sur 20, deux points bonus pour l'utilisation de Tensorflow & 2 points bonus pour les rÃ©sultats de l'apprentissage.
+
+# CompÃ©tences de communication (4pts)
+3/4 (-1 parce word pas joli. Même au delà du latex que j’avais recommandé, là le document word n’est pas beau)
+
+* PrÃ©sentation, orthographe, grammaire (malus de 1pts ou 0pts)
+* QualitÃ© gÃ©nÃ©rale de la prÃ©sentation
+* PrÃ©cision de l'explication scientifique
+
+
+# CompÃ©tences scientifiques (8pts)
+
+* est-ce que le code tourne et montre un apprentissage de l'agent? (2pts)
+2
+* formalisaiton & pertinence du choix de l'Ã©tat (2pts)
+1
+* pertinence de la justification du choix d'algorithme (2pts)
+1
+* analyse scientifiquement crÃ©dible des rÃ©sultats & recul pris (2pts)
+2
+
+# CompÃ©tences mÃ©thodologiques (8pts)
+
+* analyse du processus d'apprentissage (2pts)
+1
+* qualitÃ© de la mÃ©thode d'optimisation des hyperparamÃ¨tres (2pts)
+1
+* qualitÃ© de la mÃ©thode d'optimisation de l'Ã©tat (2pts)
+1
+* mise en place d'une automatisation des tests d'apprentissage (2pts)
+0
+
+Re-harmonation : +1
+Bonus : +1 pour la comparaison à l’agent random.
+Total : 14/20
+
+Appréciation globale :
+
+	⁃	il y a un un peu de fautes d’orthographe/ de français
+	⁃	le groupe a réduit au maximum l’état en se passant de la position du vaisseau en la replaçant par 0 ou 1 suivant que l’alien le plus proche soit à droite ou à gauche. Comme on se passe d’une information importante, il aurait fallu le justifier/en discuter expérimentalement.
+	⁃	De même, il manque l’info concernant la direction de l’alien, non?
+	⁃	Le choix du q-learning n’est pas justifié. « Tout d’abord, lorsque nous analysons le problème nous reconnaissons le fait qu’on ne connais pas la politique. Lorsque l’agent commence à explorer les actions et les états entraînés par ses actions, il explore sans aucune contrainte ou guidage sur le choix qu’il doit faire. Donc nous voulons qu’il arrive à reconnaître les états et l’action correcte associée. » n’est pas une bonne justification.
+	⁃	En revanche, la méthodologie est respecté et l’analyse des résultats présente. 
+	⁃	La démarche d’optimisation des hyperparametres et de l’état est légère..
+	⁃	La comparaison à un agent « random » a été valorisée.

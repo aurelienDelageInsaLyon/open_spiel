@@ -30,7 +30,7 @@ namespace sdm
 
     public:
         MDPInitializer(std::shared_ptr<SolvableByDP> world, Config config);
-        MDPInitializer(std::shared_ptr<SolvableByDP> world, std::string algo_name, double error = 0.0001, int trials = 20000);
+        MDPInitializer(std::shared_ptr<SolvableByDP> world, std::string algo_name, double error = 0.00000001, int trials = 20000);
         void init(std::shared_ptr<ValueFunctionInterface> vf);
     };
 } // namespace sdm

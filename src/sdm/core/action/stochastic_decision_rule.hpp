@@ -8,7 +8,7 @@
 #include <sdm/utils/linear_algebra/mapped_vector.hpp>
 #include <sdm/tools.hpp>
 #include <sdm/core/state/interface/history_interface.hpp>
-
+#include <sdm/core/state/history_tree.hpp>
 /**
  * @brief Namespace grouping all tools required for sequential decision making.
  * @namespace  sdm
@@ -22,16 +22,26 @@ namespace sdm
    * @tparam std::shared_ptr<State> the state type
    * @tparam std::shared_ptr<Action> the action type
    */
-    class StochasticDecisionRule : public DecisionRule//, public RecursiveMap<std::shared_ptr<State>, 
+    class StochasticDecisionRule : public DecisionRule
+    //, public RecursiveMap<std::shared_ptr<State>, 
     //std::shared_ptr<Action>, double>
     {
     public:
+        StochasticDecisionRule();
+        
+        StochasticDecisionRule(int nbactions);
+        
+        StochasticDecisionRule(DiscreteSpace action_space);
+
+        StochasticDecisionRule(std::vector<std::shared_ptr<Item>> listHistories, std::vector<std::pair<std::shared_ptr<Action>,double>> probaActionsForHistories);
+
+        DiscreteSpace action_space;
         std::map<std::shared_ptr<HistoryInterface>,std::map<std::shared_ptr<Action>,double>> stratMap;
+        int numActions=0;
 
         using input_type = typename DecisionRule::input_type;
         using output_type = typename DecisionRule::output_type;
 
-        StochasticDecisionRule();
 
         /**
          * @brief Get the action deducted from a given state 
@@ -59,6 +69,7 @@ namespace sdm
 
         void setProbability(const std::shared_ptr<HistoryInterface> &state, const std::shared_ptr<Action> &action, double proba);
 
+        void testValidity();
 
         std::vector<std::shared_ptr<Action>> getActions(const std::shared_ptr<HistoryInterface> &state) const;
 
@@ -70,6 +81,9 @@ namespace sdm
          * @param proba the probability
          */
         void setProbability(const std::shared_ptr<State> &state, const std::shared_ptr<Action> &action, double proba);
+
+        void setProbability(const std::shared_ptr<HistoryTree> &state, const std::shared_ptr<Action> &action, double proba);
+
 
         std::string str() const;
 

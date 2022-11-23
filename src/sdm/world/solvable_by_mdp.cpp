@@ -26,7 +26,7 @@ namespace sdm
     }
 
     std::shared_ptr<State> SolvableByMDP::getInitialState()
-    {
+    {   
         return this->initial_state_;
     }
 

@@ -220,6 +220,12 @@ namespace sdm
         /** @brief Keep relation between list of individual histories and joint histories */
         static RecursiveMap<Joint<std::shared_ptr<HistoryInterface>>, std::shared_ptr<JointHistoryInterface>> jhistory_map_;
 
+
+        /**
+         * @brief space of joint histories
+         */
+        std::set<std::shared_ptr<JointHistoryInterface>> list_joint_histories_;
+
     protected:
         /** @brief the number of agents */
         number num_agents_ = 2, h;
@@ -245,11 +251,6 @@ namespace sdm
          * @comment: Should not be used since there are to much possible wrt each joint history, belief states whould have been a better choice.
          */
         std::set<std::shared_ptr<BeliefInterface>> list_beliefs_;
-
-        /**
-         * @brief space of joint histories
-         */
-        std::set<std::shared_ptr<JointHistoryInterface>> list_joint_histories_;
 
         /**
          * @brief tuple of private history spaces, one private history space per agent

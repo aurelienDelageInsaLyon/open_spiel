@@ -6,7 +6,7 @@
 
 namespace sdm
 {
-    double CompressedOccupancyState::PRECISION = config::PRECISION_OCCUPANCY_STATE;
+    double CompressedOccupancyState::PRECISION = 0.01;//config::PRECISION_OCCUPANCY_STATE;
 
     CompressedOccupancyState::CompressedOccupancyState() : CompressedOccupancyState(2, 0)
     {

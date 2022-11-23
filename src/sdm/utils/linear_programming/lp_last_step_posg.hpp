@@ -27,7 +27,7 @@ namespace sdm
          * @param t the time step
          * @return the decision rule 
          */
-        Pair<std::shared_ptr<Action>, double> createLP(const std::shared_ptr<OccupancyStateMG> &occupancy_state, number t);
+        Pair<std::shared_ptr<StochasticDecisionRule>, std::map<std::shared_ptr<HistoryInterface>,double>> createLP(const std::shared_ptr<OccupancyStateMG> &occupancy_state, number t);
 
         /**
          * @brief Create the variable which will be used to resolve the LP
@@ -70,12 +70,15 @@ namespace sdm
 
     std::shared_ptr<sdm::JointAction> getActionPointer(std::shared_ptr<sdm::Action> a, std::shared_ptr<sdm::Action> b,
     std::shared_ptr<POMDPInterface> pomdp, number agent_id_) const;
+
+    std::map<std::shared_ptr<HistoryInterface>, double> historyValues;
     protected:
         /**
          * @brief The world
          */
         std::shared_ptr<OccupancyMG> world_;
         number agent_id_;
+        number opponent_id_;
         int nbActions=0;
         int nbHistories=0;
         int nbHistoriesOpponent=0;

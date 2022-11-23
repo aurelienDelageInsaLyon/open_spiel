@@ -12,7 +12,7 @@
 
 namespace sdm
 {
-    double OccupancyState::PRECISION = config::PRECISION_OCCUPANCY_STATE;
+    double OccupancyState::PRECISION = 0.0000000001;// config::PRECISION_OCCUPANCY_STATE;
 
     RecursiveMap<Joint<std::shared_ptr<HistoryInterface>>, std::shared_ptr<JointHistoryInterface>> OccupancyState::jhistory_map_ = {};
 
@@ -137,7 +137,8 @@ namespace sdm
     }
 
     Pair<std::shared_ptr<State>, double> OccupancyState::next(const std::shared_ptr<MDPInterface> &mdp, const std::shared_ptr<Action> &action, const std::shared_ptr<Observation> &observation, number t)
-    {
+    {   
+        //std::cout << "WARNING : i artificially made next() in occupancy_state.cpp to always call computeNext. See the git for previous verions" << std::flush << std::endl;
         switch (this->state_type)
         {
         case COMPRESSED:
@@ -223,8 +224,10 @@ namespace sdm
             std::shared_ptr<OccupancyStateInterface> compressed_occupancy_state;
 
             // Compress the occupancy state
-            compressed_occupancy_state = one_step_occupancy_state->compress();
-
+            //TODO : put compress() again
+            //std::cout << "\n trying to compress";
+            compressed_occupancy_state = one_step_occupancy_state;//->compress();
+            //std::cout << "\n i did the compression";
             double norm_compressed = compressed_occupancy_state->norm_1();
             compressed_occupancy_state->normalizeBelief(norm_compressed);
             compressed_occupancy_state->setOneStepUncompressedOccupancy(one_step_occupancy_state);
@@ -265,11 +268,13 @@ namespace sdm
         {
             // Build fully uncompressed occupancy state
             occupancy_state->setProbability(joint_history, belief, probability);
+            //std::cout << "\n joint_history : " << joint_history->str() << " has now a proba of : " << occupancy_state->getProbability(joint_history);
         }
     }
 
     double OccupancyState::getReward(const std::shared_ptr<MDPInterface> &mdp, const std::shared_ptr<Action> &action, number t)
     {
+        //std::cout<< "\n i'm in get reward from occupancy_state !" << std::flush << std::endl;
         double reward = 0.;
         auto decision_rule = action->toDecisionRule();
         // For all histories in the occupancy state
@@ -283,6 +288,7 @@ namespace sdm
             // Update the expected reward
             reward += this->getProbability(jhist) * belief->getReward(mdp, joint_action, t);
         }
+                //std::cout<< "\n i'm leaving get reward from occupancy_state !" << std::flush << std::endl;
         return reward;
     }
 
@@ -342,7 +348,7 @@ namespace sdm
             }
         }
 
-        return (((norm_1 + additional) / 2) - 1e-5 <= precision);
+        return (((norm_1 + additional) / 2) <= precision);
     }
 
     bool OccupancyState::isEqualNormInf(const std::shared_ptr<BeliefInterface> &other, double precision) const
@@ -486,10 +492,12 @@ namespace sdm
         // this->list_beliefs_.clear();
         for (const auto &joint_history_tmp : this->getStates())
         {
+            //std::cout << "\n joint_hist to be added : " << joint_history_tmp->str();
             auto joint_history = std::dynamic_pointer_cast<JointHistoryInterface>(joint_history_tmp);
             this->list_joint_histories_.insert(joint_history);
             this->list_beliefs_.insert(this->getBeliefAt(joint_history));
         }
+        //std::cout << "\n list joint histories : " << list_joint_histories_.size();
     }
 
     void OccupancyState::setup()
@@ -795,6 +803,9 @@ namespace sdm
 
     double OccupancyState::getProbabilityOverIndividualHistories(number agent, const std::shared_ptr<HistoryInterface> &ihistory) const
     {
+        if (!this->probability_ihistories.at(agent).count(ihistory)){
+            return 0.0;
+        }
         return this->probability_ihistories.at(agent).at(ihistory);
     }
 
@@ -803,17 +814,21 @@ namespace sdm
         // For all agents
         for (number ag_id = 0; ag_id < this->num_agents_; ag_id++)
         {
+            if (!this->all_list_ihistories_.empty()){
             // For all individual history of this agent
             for (const auto &ihistory : this->all_list_ihistories_[ag_id])
             {
+                //std::cout << " \n ihist : " << ihistory->str() <<std::flush;
                 // Compute the probability of the individual history of agent i
                 double prob = 0.0;
                 for (const auto &jhistory : this->getPrivateOccupancyState(ag_id, ihistory)->getStates())
                 {
+                    //std::cout << "\n jhist : " << jhistory->str()<<std::flush;
                     prob += this->getProbability(jhistory);
                 }
                 this->probability_ihistories[ag_id][ihistory] = prob;
             }
+        }
         }
     }
 
@@ -931,7 +946,7 @@ namespace sdm
         std::shared_ptr<OccupancyStateInterface> compressed_occupancy_state;
 
         // Compress the occupancy state
-        compressed_occupancy_state = one_step_occupancy_state->compress();
+        compressed_occupancy_state = one_step_occupancy_state;//->compress();
 
         double norm_compressed = compressed_occupancy_state->norm_1();
         compressed_occupancy_state->normalizeBelief(norm_compressed);

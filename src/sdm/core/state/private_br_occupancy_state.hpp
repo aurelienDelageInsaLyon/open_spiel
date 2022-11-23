@@ -23,7 +23,26 @@ namespace sdm
         PrivateBrOccupancyState(number agent_id, number num_agents, number h);
         PrivateBrOccupancyState(const PrivateBrOccupancyState &);
         PrivateBrOccupancyState(const OccupancyState &);
+        PrivateBrOccupancyState(const OccupancyState &, number id, StochasticDecisionRule dr);
+        
+        virtual std::shared_ptr<OccupancyState> make(number h);
 
+        virtual double getReward(const std::shared_ptr<MDPInterface> &mdp, const std::shared_ptr<Action> &action, number t);
+
+        double reward=0;
+            std::shared_ptr<sdm::JointAction> getActionPointer(std::shared_ptr<sdm::Action> a, std::shared_ptr<sdm::Action> b,
+    std::shared_ptr<POMDPInterface> pomdp, number agent_id_) const;
+    std::shared_ptr<sdm::Observation> getObservationPointer(std::shared_ptr<sdm::Observation> a, std::shared_ptr<sdm::Observation> b,
+    std::shared_ptr<POMDPInterface> pomdp, number agent_id_) const;
+
+    void updateOccupancyStateProba(const std::shared_ptr<OccupancyStateInterface> &occupancy_state, const std::shared_ptr<JointHistoryInterface> &joint_history, const std::shared_ptr<BeliefInterface> &belief, double probability);
+
+    /*
+        std::shared_ptr<sdm::Action> getIndivActionPointer(std::shared_ptr<sdm::Action> a,
+    std::shared_ptr<POMDPInterface> pomdp) const;
+    std::shared_ptr<sdm::Observation> getIndivObservationPointer(std::shared_ptr<sdm::Observation> a,
+    std::shared_ptr<POMDPInterface> pomdp) const;
+    */
         /**
          * @brief Get the id of the agent that related to this occupancy state.
          *
@@ -62,11 +81,15 @@ namespace sdm
         
         std::shared_ptr<Action> applyStochasticDR(const StochasticDecisionRule dr, const std::shared_ptr<HistoryInterface> &individual_history) const;
 
+        /*
         Pair<std::shared_ptr<BeliefInterface>, double> getNewBelief(const std::shared_ptr<BeliefInterface> &belief, const std::shared_ptr<Action> &action, const std::shared_ptr<Observation> &observation, const std::shared_ptr<Observation> & jobs, number t, const std::shared_ptr<MDPInterface> &mdp) const;
+        */
 
         Pair<std::shared_ptr<State>, double> computeNext(const std::shared_ptr<MDPInterface> &mdp, const std::shared_ptr<Action> &action, const std::shared_ptr<Observation> &observation, number t);
 
         StochasticDecisionRule strategyOther;
+
+        double norm_1_other(const std::shared_ptr<OccupancyState>  &other);
 
         /** @brief The agent's identifier */
         number agent_id_;

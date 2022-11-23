@@ -58,6 +58,7 @@ namespace sdm
 
     double BoundInitializer::getValue(std::shared_ptr<ValueFunctionInterface>, number t)
     {
+        //std::cout << "\n callback_value : " << this->callback_value;
         return (this->callback_value == nullptr) ? this->value_ : ((*world_->getUnderlyingProblem()).*callback_value)(t);
     }
 

@@ -64,6 +64,7 @@ namespace sdm
     {
     }
 
+
     void PWLCValueFunction::initialize(double value, number t)
     {
         this->default_values_per_horizon[this->isInfiniteHorizon() ? 0 : t] = value;
@@ -105,6 +106,8 @@ namespace sdm
 
     Pair<std::shared_ptr<Hyperplane>, double> PWLCValueFunction::evaluate(const std::shared_ptr<State> &state, number t)
     {
+        std::cout << "\n evaluate of pwlc value function";
+        std::exit(1);
         double current, max = -std::numeric_limits<double>::max();
         std::shared_ptr<AlphaVector> alpha_vector = nullptr;
 

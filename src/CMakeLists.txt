@@ -2,6 +2,7 @@
 find_package(Boost COMPONENTS system filesystem program_options iostreams serialization REQUIRED)
 find_package(Torch REQUIRED)
 find_package(CPLEX)
+find_package(GUROBI)
 
 # Check TORCH dependancy and include directories
 if(TORCH_FOUND)
@@ -14,6 +15,15 @@ endif()
 if(CPLEX_FOUND)
 	include_directories(${CPLEX_INCLUDE_DIRS})
 	add_definitions("-DWITH_CPLEX")
+	add_definitions("-DIL_STD")
+endif()
+
+# Check GUROBI dependancy and include directories
+if(GUROBI_FOUND)
+	message( "gurobi include dirs : " ${GUROBI_LIBRARIES})
+	message( "gurobi include dirs : " ${GUROBI_INCLUDE_DIR})
+	include_directories(${GUROBI_INCLUDE_DIR})
+	add_definitions("-DWITH_GUROBI")
 	add_definitions("-DIL_STD")
 endif()
 
@@ -68,9 +78,9 @@ set_property(TARGET value_function_obj PROPERTY POSITION_INDEPENDENT_CODE 1)
 
 # shared and static libraries built from the same object files
 add_library(value_function SHARED $<TARGET_OBJECTS:value_function_obj>)
-target_link_libraries(value_function core ${CPLEX_LIBRARIES})
+target_link_libraries(value_function core ${CPLEX_LIBRARIES} ${GUROBI_LIBRARIES})
 add_library(value_function_static STATIC $<TARGET_OBJECTS:value_function_obj>)
-target_link_libraries(value_function_static core_static ${CPLEX_LIBRARIES})
+target_link_libraries(value_function_static core_static ${CPLEX_LIBRARIES} ${GUROBI_LIBRARIES})
 
 # LIB WORLD
 file(
@@ -129,6 +139,7 @@ add_library(planning SHARED $<TARGET_OBJECTS:planning_obj>)
 target_link_libraries(planning core value_function world fmt)
 add_library(planning_static STATIC $<TARGET_OBJECTS:planning_obj>)
 target_link_libraries(planning_static core_static value_function_static world_static fmt)
+
 
 # LIB REINFORCEMENT LEARNING
 file(

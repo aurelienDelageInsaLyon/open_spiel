@@ -87,6 +87,7 @@ namespace sdm
          */
         virtual double getReward(const std::shared_ptr<State> &belief, const std::shared_ptr<Action> &action, number t = 0);
 
+
         /**
          * @brief Get the expected next value
          * 

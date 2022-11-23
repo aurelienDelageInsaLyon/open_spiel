@@ -1,0 +1,43 @@
+Correction IAT 2
+
+Mathis Chapuis, Rapha ̈elle Grenier, Arnaud Lombardi, Jean Vignat
+
+# Rappel : 
+le projet est notÃ© sur 20, deux points bonus pour l'utilisation de Tensorflow & 2 points bonus pour les rÃ©sultats de l'apprentissage.
+
+# CompÃ©tences de communication (4pts)
+4/4
+* PrÃ©sentation, orthographe, grammaire (malus de 1pts ou 0pts)
+* QualitÃ© gÃ©nÃ©rale de la prÃ©sentation
+* PrÃ©cision de l'explication scientifique
+
+
+# CompÃ©tences scientifiques (8pts)
+
+* est-ce que le code tourne et montre un apprentissage de l'agent? (2pts)
+2
+* formalisaiton & pertinence du choix de l'Ã©tat (2pts)
+2
+* pertinence de la justification du choix d'algorithme (2pts)
+2
+* analyse scientifiquement crÃ©dible des rÃ©sultats & recul pris (2pts)
+2
+# CompÃ©tences mÃ©thodologiques (8pts)
+
+* analyse du processus d'apprentissage (2pts)
+2
+* qualitÃ© de la mÃ©thode d'optimisation des hyperparamÃ¨tres (2pts)
+1
+* qualitÃ© de la mÃ©thode d'optimisation de l'Ã©tat (2pts)
+0
+* mise en place d'une automatisation des tests d'apprentissage (2pts)
+0
+
+Bonus : +1
+
+Appréciation globale :
+Le groupe a mis en avant, dans son rapport, une compréhension plus qu’acceptable et pertinente de ce qui a été enseigné. 
+Il semblerait que le groupe ait manqué de temps pour développer autant qu’ils l’auraient aimé le projet et sa méthodologie. C’est dommage, parce que cette dernière a été visiblement comprise.
+En bref, un bon projet, qui aurait pu être encore mieux avec plus de temps.
+
+Total : 16/20

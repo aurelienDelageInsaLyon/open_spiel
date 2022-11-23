@@ -24,6 +24,11 @@ namespace sdm
         return this->getData().first;
     }
 
+    std::shared_ptr<Action> HistoryTree::getLastAction()
+    {
+        return this->getData().second;
+    }
+
     number HistoryTree::getHorizon() const
     {
         return this->getDepth();
@@ -31,6 +36,7 @@ namespace sdm
 
     std::shared_ptr<HistoryInterface> HistoryTree::expand(const std::shared_ptr<Observation> &observation, const std::shared_ptr<Action> &action, bool backup)
     {
+        //std::cout << "\n expanding with observation" << observation << " and action " << action;
         return this->expand<HistoryTree>(observation, action, backup);
     }
 

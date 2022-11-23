@@ -58,7 +58,8 @@ namespace sdm
     }
 
     std::set<std::shared_ptr<State>> TabularStateDynamics::getReachableStates(const std::shared_ptr<State> &state, const std::shared_ptr<Action> &action, number) const
-    {
+    {   
+        //std::cout << "\n trying to find joint action : " << action;
         const auto &iterator = this->successor_states.find(state);
         if (iterator != this->successor_states.end())
         {
@@ -68,6 +69,7 @@ namespace sdm
                 return this->successor_states.at(state).at(action);
             }
         }
+        std::cout << "\n didnt find?";
         return {};
     }
 

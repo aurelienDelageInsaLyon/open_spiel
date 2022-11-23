@@ -115,10 +115,11 @@ namespace sdm
             os << tree.str();
             return os;
         }
+        
+        number depth_ = 0;
 
     protected:
         //! @brief depth of the tree
-        number depth_ = 0;
 
         //! @brief maximum length of the tree
         number max_depth_ = std::numeric_limits<number>::max();

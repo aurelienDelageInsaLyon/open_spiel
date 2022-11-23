@@ -2,7 +2,7 @@
 
 namespace sdm
 {
-    double BetaVector::PRECISION = 0.1;
+    double BetaVector::PRECISION = 0.0000000001;
     
     double BetaVector::getValueAt(const std::shared_ptr<State> &x, const std::shared_ptr<HistoryInterface> &o) const
     {

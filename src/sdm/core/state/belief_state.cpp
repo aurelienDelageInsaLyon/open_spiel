@@ -40,7 +40,8 @@ namespace sdm
   }
 
   Pair<std::shared_ptr<State>, double> Belief::next(const std::shared_ptr<MDPInterface> &mdp, const std::shared_ptr<Action> &action, const std::shared_ptr<Observation> &observation, number t)
-  {
+  { 
+    //std::cout << "I'm in next of belief_state.cpp, that's weird"<<std::flush<<std::endl;
     // Create next belief.
     auto next_belief = std::make_shared<Belief>();
     auto pomdp = std::dynamic_pointer_cast<POMDPInterface>(mdp);
@@ -48,6 +49,7 @@ namespace sdm
     {
       for (const auto &next_state : pomdp->getReachableStates(pair_state_proba.first, action, t))
       {
+        //std::cout << "\n in a reachable state"<<std::endl;
         double proba = pomdp->getDynamics(pair_state_proba.first, action, next_state, observation, t) * pair_state_proba.second;
 
         if (proba > 0)
@@ -71,12 +73,16 @@ namespace sdm
 
   double Belief::getReward(const std::shared_ptr<MDPInterface> &mdp, const std::shared_ptr<Action> &action, number t)
   {
+    //std::cout << "\n belief_state.cpp::getReward()";
+    //std::cout << "\n belief_state.cpp::belief : " << this->str();
     // Compute reward : \sum_{s} b(s)r(s,a)
     double reward = 0.0;
     for (const auto &state : this->getStates())
     {
+      //std::cout << "\n s : " << state->str() << " r = " << mdp->getReward(state, action, t)<<std::endl; 
       reward += this->getProbability(state) * mdp->getReward(state, action, t);
     }
+    //std::cout << "\n action : " << action->str() << "computed reward : " << reward;
     return reward;
   }
 
@@ -162,7 +168,7 @@ namespace sdm
         return false;
     }
 
-    return (((norm_1 + additional) / 2) - 1e-5 <= precision);
+    return (((norm_1 + additional) / 2) <= precision);
   }
 
   bool Belief::isEqual(const Belief &other, double precision) const

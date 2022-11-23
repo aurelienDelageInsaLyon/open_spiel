@@ -18,8 +18,8 @@ using namespace sdm;
 int main(int argc, char **argv)
 {
 	std::string filename = (argc > 1) ? argv[1] : config::PROBLEM_PATH + "dpomdp/mabc.dpomdp";
-	number horizon = 10, truncation = 1;
-	double error = 0.00001, discount = 1.;
+	number horizon = 10, truncation = 0;
+	double error = 0.000000001, discount = 1.;
 	try
 	{
 		// Parse file into MPOMDP
